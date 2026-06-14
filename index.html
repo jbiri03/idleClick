@@ -4,46 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cake Idle Clicker</title>
+    <link rel="stylesheet" href="../Styles/index.css">
 </head>
 <body>
     <!-- NAVIGATION OF BASE FEATURES-->
-    <a href="index.html"><button>Home</button></a>
-    <a href="sell.html"><button>Sell Cakes</button></a>
-    <a href="upgrades.html"><button>Upgrades</button></a>
-    <a href="pets.html"><button>Pets</button></a>
-    <a href="prestige.html"><button>Prestige</button></a>
-    <a href="inventory.html"><button>Inventory</button></a> 
+     <div id="nav">
+        <a href="index.html"><button>Home</button></a>
+        <a href="sell.html"><button>Sell Cakes</button></a>
+        <a href="upgrades.html"><button>Upgrades</button></a>
+        <a href="pets.html"><button>Pets</button></a>
+        <a href="prestige.html"><button>Prestige</button></a>
+        <a href="inventory.html"><button>Inventory</button></a> 
+    </div>
 
     <!-- ADDITIONAL FEATURES TO BE ADDED-->
     <!-- <a href="shop.html"><button>Shop</button></a> -->
 
     <!-- CLICKER IMAGE -->
-    <img src="Images/Cake_Placeholder.jpg" alt="Cake">
+     <div id="cake">
+        <img src="Images/Cake_Placeholder.jpg" alt="Cake">
+    </div>
 
     <!-- CURRENCY DISPLAY -->
     <p>Cakes{}</p>
     <p>Currency ${}</p>
 
     <!-- GAME STATS -->
-    <h1>STATISTICS</h1>
+     <div id="stats">
+        <h1>STATISTICS</h1>
 
-    <h2>BALANCES</h2>
-    <ul>
-        <li>Cakes:{}</li>
-        <li>Cash: ${}</li>
-    </ul>
+        <h2>BALANCES</h2>
+            <ul>
+                <li>Cakes:{}</li>
+                <li>Cash: ${}</li>
+            </ul>
 
-    <h2>PRODUCTION</h2>
-    <ul>
-        <li>Per Click: {}</li>
-    </ul>
+        <h2>PRODUCTION</h2>
+            <ul>
+                <li>Per Click: {}</li>
+            </ul>
 
-    <h2>PROGRESS</h2>
-    <ul>
-        <li>Prestige Multiplier: {}</li>
-        <li>Current Prestige Level: {} </li>
-    </ul>
+        <h2>PROGRESS</h2>
+            <ul>
+                <li>Prestige Multiplier: {}</li>
+                <li>Current Prestige Level: {} </li>
+            </ul>
 
-    <button>SHARE</button>
+        <button>SHARE</button>
+    </div>
 </body>
 </html>
