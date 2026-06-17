@@ -1,3 +1,114 @@
-*{
-    background-color: aliceblue;
+/* GENERAL DISPLAY */
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: ivory;
+}
+
+/* ALIGNMENT */
+.column1{
+  float: left;
+  width: 25%; 
+  display: grid;
+}
+
+.column2{
+  float: left;
+  width: 55%; 
+  display: grid;
+  /* justify-items: left; */
+}
+
+.column3{
+  float: left;
+  width: 5%; 
+  display: grid;
+
+}
+
+/* NAVIGATION */
+#nav{
+    height: 100%;
+    background-color: palegreen;
+}
+
+#nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 20px 0px;
+}
+
+#nav ul li{
+    display: block;
+    padding: 10px 50px;
+}
+
+#nav ul li button{
+    width: 100%;
+    font-size: 300%;
+}
+
+#nav ul li button:hover{
+    background-color: pink;
+}
+
+/* TOPBAR */
+#topBar{
+    padding: 10px 5px;
+    background-color: pink;
+}
+#login button{
+    padding: 0px 10px;
+}
+
+/* CURRENCY DISPLAY */
+#currency{
+    justify-items: center;
+}
+
+#currency ul li{
+    list-style-type: none;
+}
+
+/* CAKE CLICKER */
+#cake button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+
+  border: none;
+  background: none;
+
+  cursor: pointer;
+}
+
+#cake button img{
+  width: 100%;
+}
+
+/* STATISTICS */
+#stats{
+    height: 100%;
+    width: 170%;
+    background-color: palegreen;
+}
+
+#stats h1{
+    padding: 16px 0px;
+    margin: 0;
+    text-align: center;
+}
+
+#stats h2{
+    padding: 0px 5px;
+    margin: 0;
+}
+
+
+#stats ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0px 5px;
 }
