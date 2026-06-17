@@ -1,4 +1,18 @@
 #loginForm{
     display: flex;
-    justify-content: center
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+#loginForm ul li{
+    list-style-type: none;
+}
+
+#loginForm #usernameInput{
+    padding: 5px 0px;
+}
+
+#loginForm #passwordInput{
+    padding: 5px 0px;
 }
