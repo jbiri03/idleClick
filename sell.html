@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cake Idle Clicker</title>
+        <link rel="stylesheet" href="Styles/index.css">
+    </head>
+    <body>
+        <!-- NAVIGATION OF BASE FEATURES-->
+        <div class="column1"> 
+            <div id="nav">
+                <ul>
+                    <li><a href="index.html"><button>Home</button></a></li>
+                    <li><a href="sell.html"><button>Sell</button></a></li>
+                    <li><a href="upgrades.html"><button>Upgrades</button></a></li>
+                    <li><a href="pets.html"><button>Pets</button></a></li>
+                    <li><a href="prestige.html"><button>Prestige</button></a></li>
+                    <li><a href="inventory.html"><button>Inventory</button></a> </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ADDITIONAL FEATURES TO BE ADDED-->
+        <!-- <a href="shop.html"><button>Shop</button></a> -->
+
+        <div class="column2">
+
+            <!-- SELL -->
+            <div id="sellSect">
+                <p>Cake to sell: <span id = cakeCount>0</span></p>
+                <button id="sell">Sell Cakes</button>
+            </div>
+        </div>
+
+
+        <!-- GAME STATS -->
+        <div class="column3">
+            <div id="stats">
+                <h1>STATISTICS</h1>
+
+                <h2>BALANCES</h2>
+                    <ul>
+                        <li>Cakes: <span id="cakeStat">0</span></li>
+                        <li>Cash: $<span id="money">0</span></li>
+                    </ul>
+
+                <h2>PRODUCTION</h2>
+                    <ul>
+                        <li>Per Click: {}</li>
+                        <li>Cake Type: <span id="cakeDetails"></span></li>
+                    </ul>
+
+                <h2>PROGRESS</h2>
+                    <ul>
+                        <li>Prestige Multiplier: {}</li>
+                        <li>Current Prestige Level: {} </li>
+                    </ul>
+
+                <button>SHARE</button>
+            </div>
+        </div>
+
+        <!-- SCRIPTS -->
+        <!-- CAKE DETAILS -->
+        <script src="JavaScript/Cake.js"></script>
+
+        <!-- SELL SCRIPT -->
+        <script src="JavaScript/sell.js"></script>
+    </body>
+</html>

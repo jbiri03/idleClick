@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cake Idle Clicker</title>
-    <link rel="stylesheet" href="../Styles/login.css">
+    <link rel="stylesheet" href="Styles/login.css">
 </head>
 <body>
     <!-- LOGIN FORM -->
     <form id="loginForm" action="SEND">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="text" id="password" name="password">
+        <ul>
+            <!-- CREATE ACCOUNT -->
+            <a href="">Don't have an account? Register here.</a>
+            
+            <!-- USERNAME -->
+            <div id="usernameInput">       
+                <li><label for="username">Username:</label></li>
+                <li><input type="text" id="username" name="username"></li>
+            </div> 
+            <!-- PASSWORD -->
+            <div id="passwordInput">
+                <li><label for="password">Password:</label></li>
+                <li><input type="text" id="password" name="password"></li>
+            </div>
+            <!-- SUBMIT BUTTON -->
+            <button>SUBMIT</button>
+
+
+        </ul>
     </form>
 </body>
 </html>
