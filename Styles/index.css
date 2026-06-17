@@ -58,8 +58,30 @@ html, body{
     padding: 10px 5px;
     background-color: pink;
 }
-#login button{
-    padding: 0px 10px;
+
+#topBar button a{
+    text-decoration: none;
+    color: black;
+}
+
+#topBar button a:link {
+    text-decoration: none;
+    color: black;
+}
+
+#topBar button a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#topBar button a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+#topBar button a:active {
+    text-decoration: none;
+    color: black;
 }
 
 /* CURRENCY DISPLAY */
