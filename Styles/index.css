@@ -53,6 +53,7 @@ html, body{
     background-color: pink;
 }
 
+/* MAIN CONTENTS  */
 /* TOPBAR */
 #topBar{
     padding: 10px 5px;
@@ -133,4 +134,13 @@ html, body{
     list-style-type: none;
     margin: 0;
     padding: 0px 5px;
+}
+
+/* SELL PAGE */
+#sellSect{
+    display: block;
+    background-color: aqua;
+    text-align: center;
+    margin-top: 10%;
+    padding: 10px 0px;
 }
