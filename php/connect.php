@@ -7,9 +7,10 @@ require_once __DIR__ . '/config.php';
 $dsn = "sqlite:$db";
 
 // VARIABLES TO CONNECT TO TABLE
+$table_name = 'users';
 $email = $_POST['email'];
 $username = $_POST['username'];
-$table_name = 'users';
+$password = $_POST['password'];
 
 //TRY CATCH
 try {
@@ -18,8 +19,8 @@ try {
     echo 'Connected to the SQLite database successfully!' ;
 
     //INSERT TABLE DATA
-    $sql = "INSERT INTO $table_name (email, username)
-    VALUES ('$email', '$username')";
+    $sql = "INSERT INTO $table_name (email, username, password)
+    VALUES ('$email', '$username', '$password')";
     $stmt = $pdo->prepare($sql);
 
     //EXECUTE QUERY
