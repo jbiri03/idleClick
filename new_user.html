@@ -8,14 +8,14 @@
 </head>
 <body>
     <!-- LOGIN FORM -->
-    <form id="loginForm" action="SEND">
+    <form id="loginForm" method="POST" action="submit.php">
         <ul>
             <!-- CREATE ACCOUNT -->
             <a href="new_user.html">Don't have an account? Register here.</a>
             
             <!-- USERNAME -->
             <div id="usernameInput">       
-                <li><label for="username">Username:</label></li>b 
+                <li><label for="username">Username:</label></li> 
                 <li><input type="text" id="username" name="username"></li>  
             </div> 
             <!-- PASSWORD -->
@@ -23,6 +23,7 @@
                 <li><label for="password">Password:</label></li>
                 <li><input type="text" id="password" name="password"></li>
             </div>
+
             <!-- SUBMIT BUTTON -->
             <button>SUBMIT</button>
         </ul>
