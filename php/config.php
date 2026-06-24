@@ -1,5 +1,5 @@
 <?php
 
-$db = './database/test.db';
+$db = '../database/test.db';
 
 ?>
