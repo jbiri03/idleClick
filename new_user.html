@@ -8,11 +8,13 @@
 </head>
 <body>
     <!-- LOGIN FORM -->
-    <form id="loginForm" method="POST" action="submit.php">
+    <form id="loginForm" method="POST" action="php/connect.php">
         <ul>
-            <!-- CREATE ACCOUNT -->
-            <a href="new_user.html">Don't have an account? Register here.</a>
-            
+            <!-- EMAIL -->
+            <div id="emailInput">       
+                <li><label for="username">Email:</label></li> 
+                <li><input type="text" id="email" name="email"></li>  
+            </div> 
             <!-- USERNAME -->
             <div id="usernameInput">       
                 <li><label for="username">Username:</label></li> 
@@ -23,9 +25,14 @@
                 <li><label for="password">Password:</label></li>
                 <li><input type="text" id="password" name="password"></li>
             </div>
+            <!-- CONFIRM PASSWORD -->
+            <div id="passwordConfirm">
+                <li><label for="confirm">Confirm Password:</label></li>
+                <li><input type="text" id="confirm" name="confirm"></li>
+            </div>
 
             <!-- SUBMIT BUTTON -->
-            <button>SUBMIT</button>
+            <button>Submit</button>
         </ul>
     </form>
 </body>
