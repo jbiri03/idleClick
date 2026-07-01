@@ -1,3 +1,4 @@
+
 #loginForm{
     display: flex;
     justify-content: center;
@@ -16,3 +17,49 @@
 #loginForm #passwordInput{
     padding: 5px 0px;
 }
+
+span{
+    padding: 0px 5px ;
+    color: red;
+}
+
+/* REQUIREMENTS DISPLAY */
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  color: #000;
+  position: relative;
+  padding: 0px;
+  margin-top: 0px;
+  position:fixed;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "\2714";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "\2716";
+}
+
+
+
