@@ -85,6 +85,13 @@ html, body{
     color: black;
 }
 
+.welcome-message{
+    text-align: center;
+    font-size: 200%;
+    padding: 10px 0px;
+    color: white;
+}
+
 /* CURRENCY DISPLAY */
 #currency{
     justify-items: center;
