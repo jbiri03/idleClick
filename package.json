@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://gitlab.com/wgu-gitlab-environment/student-repos/jbiri/d424-software-engineering-capstone/issues"
   },
-  "homepage": "https://gitlab.com/wgu-gitlab-environment/student-repos/jbiri/d424-software-engineering-capstone#readme"
+  "homepage": "https://gitlab.com/wgu-gitlab-environment/student-repos/jbiri/d424-software-engineering-capstone#readme",
+  "dependencies": {
+    "sql.js": "^1.14.1"
+  }
 }
