@@ -24,6 +24,7 @@ try {
 
             // Verify password
             if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['welcome_message'] = 'Login successful. Welcome, ' . htmlspecialchars($username) . '!';
                 header("Location: ../index.php");
