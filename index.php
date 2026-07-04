@@ -1,5 +1,6 @@
 <?php
     session_start();
+    
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -14,7 +15,7 @@
         <div class="column1"> 
             <div id="nav">
                 <ul>
-                    <li><a href="index.html"><button>Home</button></a></li>
+                    <li><a href="index.php"><button>Home</button></a></li>
                     <li><a href="sell.html"><button>Sell</button></a></li>
                     <li><a href="upgrades.html"><button>Upgrades</button></a></li>
                     <li><a href="pets.html"><button>Pets</button></a></li>
@@ -33,13 +34,15 @@
             <div id="topBar">
                 <button><a href="php/login.php">Login</a></button>
                 <button>Daily Bonus</button>
-                <button>Save Game</button>
+                <button id="saveButton">Save Game</button>
                 <?php 
                     if (isset($_SESSION['welcome_message'])): 
                 ?>
                 <div class="welcome-message">
                     <?php 
                         echo strtoupper($_SESSION['welcome_message']); 
+                        //ID TESTING
+                        echo $_SESSION['user_id'];
                         unset($_SESSION['welcome_message']);
                     ?>
                 </div>
@@ -49,14 +52,14 @@
             <!-- CURRENCY DISPLAY -->
             <div id="currency">   
                 <ul>        
-                    <li>Cakes: <span id="cakeCount">0</span></li>
-                    <li>Currency: $<span id ="cash">0</span></li>
+                    <li>Cakes: <span id="clickCount">0</span></li>
+                    <li>Currency: $<span id="cash">0</span></li>
                 </ul>
             </div>
 
             <!-- CLICKER IMAGE -->
             <div id="cake">
-                <button id="btnClick"><img src="Images/Cake_Placeholder.jpg" alt="Cake"></button>
+                <button id="clicker"><img src="Images/Cake_Placeholder.jpg" alt="Cake"></button>
             </div>
         </div>
 
@@ -90,9 +93,9 @@
 
         <!-- SCRIPTS -->
         <!-- CLICK COUNTER -->
-        <script src="JavaScript/clicker.js"></script>
+        <script src="logic/clicker.js"></script>
 
         <!-- CAKE DETAILS -->
-         <script src="JavaScript/Cake.js"></script>
+         <script src="logic/Cake.js"></script>
     </body>
 </html>
