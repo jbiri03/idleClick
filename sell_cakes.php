@@ -1,3 +1,39 @@
+<?php
+    session_start();
+    require_once __DIR__ . '/php/config.php';
+
+    $clicks = isset($_POST['clicks']) ? $_POST['clicks'] : 0;
+    $currency = isset($_POST['currency']) ? $_POST['currency'] : 0;
+
+    if(isset($_SESSION['user_id'])) {
+        try {
+            $dsn = "sqlite:$db";
+            $pdo = new \PDO($dsn);
+
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $pdo->prepare("SELECT cakes, currency FROM player_save WHERE id = :user_id");
+            $stmt->execute([':user_id' => $_SESSION['user_id']]);
+            $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if($player_data) {
+                $current_cakes = (int)$player_data['cakes'];
+                $current_currency = (int)$player_data['currency'];
+
+                
+            } else {
+                echo "Player data not found.";
+            }
+
+        } catch (\PDOException $e) {
+            echo "Database connection failed: " . $e->getMessage();
+        }
+    } else {
+        echo "User not logged in.";
+    }
+
+?>
+
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -12,7 +48,7 @@
             <div id="nav">
                 <ul>
                     <li><a href="index.php"><button>Home</button></a></li>
-                    <li><a href="sell.html"><button>Sell</button></a></li>
+                    <li><a href="sell_cakes.php"><button>Sell</button></a></li>
                     <li><a href="upgrades.html"><button>Upgrades</button></a></li>
                     <li><a href="pets.html"><button>Pets</button></a></li>
                     <li><a href="prestige.html"><button>Prestige</button></a></li>
@@ -28,8 +64,8 @@
 
             <!-- SELL -->
             <div id="sellSect">
-                <p>Cake to sell: <span id = cakeCount>0</span></p>
-                <button id="sell">Sell Cakes</button>
+                <p>Cake to sell: <span id = cakeCount><?php echo $current_cakes; ?></span></p>
+                <button id="sell-button">Sell Cakes</button>
             </div>
         </div>
 
@@ -41,8 +77,8 @@
 
                 <h2>BALANCES</h2>
                     <ul>
-                        <li>Cakes: <span id="cakeStat">0</span></li>
-                        <li>Cash: $<span id="money">0</span></li>
+                        <li>Cakes: <span id="cakeStat"><?php echo $current_cakes; ?></span></li>
+                        <li>Cash: $<span id="currency"><?php echo $current_currency; ?></span></li>
                     </ul>
 
                 <h2>PRODUCTION</h2>
@@ -63,9 +99,9 @@
 
         <!-- SCRIPTS -->
         <!-- CAKE DETAILS -->
-        <script src="JavaScript/Cake.js"></script>
+        <script src="logic/Cake.js"></script>
 
         <!-- SELL SCRIPT -->
-        <script src="JavaScript/sell.js"></script>
+        <script src="logic/sell.js"></script>
     </body>
 </html>
