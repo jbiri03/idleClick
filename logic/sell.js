@@ -1,9 +1,19 @@
 const sellButton = document.getElementById("sell-button");
 let currency = parseFloat(document.getElementById("currency").textContent);
 let cakeCount = parseFloat(document.getElementById("cakeCount").textContent);
+let cakePrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10; // Random price between 10 and 100
+document.getElementById("cakePrice").textContent = cakePrice; // Display the initial cake price
+
+function updateCakePrice() {
+    cakePrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10; // Random price between 10 and 100
+    console.log("Updated cake price: " + cakePrice);
+    document.getElementById("cakePrice").textContent = cakePrice; // Update the displayed cake price
+}
+
+
 
 sellButton.addEventListener("click", () => {
-    currency += cakeCount; // Update currency with the current cake count
+    currency += cakeCount * cakePrice;  // Update currency with the current cake count and price
 
     const newCakeCount = 0; // Reset cake count to 0 after selling
   
@@ -30,3 +40,6 @@ sellButton.addEventListener("click", () => {
     xhr.send("currency=" + dataToSend + "&cakeCount=" + clicks);
     
 });
+
+
+setInterval(updateCakePrice, 60000); // Call the function to update the cake price every 60 seconds

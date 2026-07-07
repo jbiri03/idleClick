@@ -31,7 +31,6 @@
     } else {
         echo "User not logged in.";
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +48,7 @@
                 <ul>
                     <li><a href="index.php"><button>Home</button></a></li>
                     <li><a href="sell_cakes.php"><button>Sell</button></a></li>
-                    <li><a href="upgrades.php"><button>Upgrades</button></a></li>
+                    <li><a href="upgrades.html"><button>Upgrades</button></a></li>
                     <li><a href="pets.html"><button>Pets</button></a></li>
                     <li><a href="prestige.html"><button>Prestige</button></a></li>
                     <li><a href="inventory.html"><button>Inventory</button></a> </li>
@@ -61,13 +60,19 @@
         <!-- <a href="shop.html"><button>Shop</button></a> -->
 
         <div class="column2">
-
-            <!-- SELL -->
-            <div id="sellSect">
-                <p>Cake to sell: <span id = cakeCount><?php echo $current_cakes; ?></span></p>
-                <p>Current Price: $<span id="cakePrice">0</span></p>
-                <button id="sell-button">Sell Cakes</button>
-            </div>
+            <!-- UPGRADES -->
+             <div id="upgradeSect">
+                <h1>Upgrades</h1>
+                <ul>
+                    <div class ="upgradeButtons">
+                        <li><button id="upgrade1">Upgrade 1</button></li>
+                        <span id="upgrade1Cost">Cost: $100 | Effect: +1 per click | Level: <span id="upgrade1Level">0</span></span>
+                    </div>
+                    
+                    <li><button id="upgrade2">Upgrade 2</button></li>
+                    <li><button id="upgrade3">Upgrade 3</button></li>
+                </ul>
+             </div>
         </div>
 
 
@@ -79,7 +84,7 @@
                 <h2>BALANCES</h2>
                     <ul>
                         <li>Cakes: <span id="cakeStat"><?php echo $current_cakes; ?></span></li>
-                        <li>Cash: $<span id="currency"><?php echo $current_currency; ?></span></li>
+                        <li>Cash: $<span id="money"><?php echo $current_currency; ?></span></li>
                     </ul>
 
                 <h2>PRODUCTION</h2>
@@ -102,7 +107,8 @@
         <!-- CAKE DETAILS -->
         <script src="logic/Cake.js"></script>
 
-        <!-- SELL SCRIPT -->
-        <script src="logic/sell.js"></script>
+        <!-- UPGRADE SCRIPT -->
+        <script src="logic/upgrades.js"></script>
+
     </body>
 </html>

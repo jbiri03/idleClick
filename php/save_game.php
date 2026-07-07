@@ -9,8 +9,8 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $clicks = $_POST['clicks'];
-        echo "Received data: " . htmlspecialchars($clicks);
-        $stmt = $pdo->prepare("INSERT OR REPLACE INTO player_save (id, cakes) VALUES (:user_id, :clicks)");
+        echo "Game saved successfully. Cakes: " . htmlspecialchars($clicks);
+        $stmt = $pdo->prepare("UPDATE player_save SET cakes = :clicks WHERE id = :user_id");
         $stmt->execute([
             ':user_id' => $_SESSION['user_id'] ?? null,
             ':clicks' => $clicks,

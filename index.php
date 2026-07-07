@@ -2,6 +2,9 @@
     session_start();
     require_once __DIR__ . '/php/config.php';
 
+    $session_id = session_id();
+
+
     $clicks = isset($_POST['clicks']) ? $_POST['clicks'] : 0;
     $currency = isset($_POST['currency']) ? $_POST['currency'] : 0;
 
@@ -29,7 +32,7 @@
             echo "Database connection failed: " . $e->getMessage();
         }
     } else {
-        echo "User not logged in.";
+        echo "Please log in.";
     }
     
 ?>
@@ -47,11 +50,11 @@
             <div id="nav">
                 <ul>
                     <li><a href="index.php"><button>Home</button></a></li>
-                    <li><a href="sell_cakes.php"><button>Sell</button></a></li>
-                    <li><a href="upgrades.html"><button>Upgrades</button></a></li>
-                    <li><a href="pets.html"><button>Pets</button></a></li>
-                    <li><a href="prestige.html"><button>Prestige</button></a></li>
-                    <li><a href="inventory.html"><button>Inventory</button></a> </li>
+                    <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
+                    <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
+                    <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
+                    <li><a href="prestige.html"><button id = "prestigeButton">Prestige</button></a></li>
+                    <li><a href="inventory.html"><button id ="inventoryButton">Inventory</button></a> </li>
                 </ul>
             </div>
         </div>
@@ -63,8 +66,8 @@
             <!-- SIGN IN -->
 
             <div id="topBar">
-                <button><a href="php/login.php">Login</a></button>
-                <button>Daily Bonus</button>
+                <a href="php/login.php"><button id = "loginButton">Login or Register</button></a>
+                <button id = "dailyButton">Daily Bonus</button>
                 <button id="saveButton">Save Game</button>
                 <?php 
                     if (isset($_SESSION['username'])): 
@@ -76,6 +79,11 @@
                         echo ' ID: ' . $_SESSION['user_id'];
                     ?>
                 </div>
+                    <?php else: ?>
+                        <div class = "login-message">
+                            <p>&#8593 LOG IN OR CREATE ACCOUNT TO PLAY</p>
+                        </div>
+                
                     <?php endif; ?>
             </div>
 
@@ -126,6 +134,11 @@
         <script src="logic/clicker.js"></script>
 
         <!-- CAKE DETAILS -->
-         <script src="logic/Cake.js"></script>
+         <script src="logic/Cake.js">
+            // const sessionId = ""; // Pass the session ID to the JavaScript file
+         </script>
+
+         <!-- LOG IN REQUIREMENT -->
+          <script src="logic/check_session.js"></script>
     </body>
 </html>

@@ -26,6 +26,7 @@ try {
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION = [];
                 session_regenerate_id(true);
+                // session_destroy(); // Remove this when finished testing!
 
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $username;
