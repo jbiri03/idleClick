@@ -31,8 +31,6 @@
         } catch (\PDOException $e) {
             echo "Database connection failed: " . $e->getMessage();
         }
-    } else {
-        echo "Please log in.";
     }
     
 ?>
@@ -49,7 +47,7 @@
         <div class="column1"> 
             <div id="nav">
                 <ul>
-                    <li><a href="index.php"><button>Home</button></a></li>
+                    <li><a href="index.php"><button id = "homeButton">Home</button></a></li>
                     <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
                     <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
                     <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
@@ -69,6 +67,7 @@
                 <a href="php/login.php"><button id = "loginButton">Login or Register</button></a>
                 <button id = "dailyButton">Daily Bonus</button>
                 <button id="saveButton">Save Game</button>
+                <button id = "logOut">Log Out</button>
                 <?php 
                     if (isset($_SESSION['username'])): 
                 ?>
@@ -139,6 +138,14 @@
          </script>
 
          <!-- LOG IN REQUIREMENT -->
-          <script src="logic/check_session.js"></script>
+          <script src="logic/session_check/check_session.js"></script>
+<!-- 
+          DESTROY SESSION -->
+          <script>
+            const logOut = document.getElementById('logOut');
+                logOut.addEventListener('click', function() {
+                    window.location.href = 'php/logout.php';
+                });
+          </script>
     </body>
 </html>

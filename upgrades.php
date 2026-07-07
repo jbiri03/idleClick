@@ -29,7 +29,7 @@
             echo "Database connection failed: " . $e->getMessage();
         }
     } else {
-        echo "User not logged in.";
+        header("Location: index.php");
     }
 ?>
 

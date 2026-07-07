@@ -29,7 +29,7 @@
             echo "Database connection failed: " . $e->getMessage();
         }
     } else {
-        echo "User not logged in.";
+        header("Location: index.php");
     }
 
 ?>
@@ -47,12 +47,12 @@
         <div class="column1"> 
             <div id="nav">
                 <ul>
-                    <li><a href="index.php"><button>Home</button></a></li>
-                    <li><a href="sell_cakes.php"><button>Sell</button></a></li>
-                    <li><a href="upgrades.php"><button>Upgrades</button></a></li>
-                    <li><a href="pets.html"><button>Pets</button></a></li>
-                    <li><a href="prestige.html"><button>Prestige</button></a></li>
-                    <li><a href="inventory.html"><button>Inventory</button></a> </li>
+                    <li><a href="index.php"><button id = "homeButton">Home</button></a></li>
+                    <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
+                    <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
+                    <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
+                    <li><a href="prestige.html"><button id = "prestigeButton">Prestige</button></a></li>
+                    <li><a href="inventory.html"><button id = "inventoryButton">Inventory</button></a> </li>
                 </ul>
             </div>
         </div>
@@ -104,5 +104,8 @@
 
         <!-- SELL SCRIPT -->
         <script src="logic/sell.js"></script>
+
+        <!-- LOGIN REQUIREMENT -->
+         <script src = "logic/session_check/sell_session_check.js"></script>
     </body>
 </html>
