@@ -34,6 +34,13 @@
 
                 
             } else {
+                $current_cakes = 0;
+                $current_currency = 0;
+                $current_multiplier = 1;
+                $current_clickPower = 1;
+                $current_cps = 0;
+                $current_bonus = 0;
+
             }
 
         } catch (\PDOException $e) {
@@ -84,7 +91,7 @@
                     <?php 
                         echo 'WELCOME, ' . strtoupper($_SESSION['username']) . '!';
                         //ID TESTING
-                        echo ' ID: ' . $_SESSION['user_id'];
+                        echo ' PLAYER ID: ' . $_SESSION['user_id'];
                     ?>
                 </div>
                     <?php else: ?>
@@ -98,7 +105,7 @@
             <!-- CURRENCY DISPLAY -->
             <div id="currency">   
                 <ul>        
-                    <li>Cakes: <span id="clickCount1"><?php echo isset($current_cakes) ? $current_cakes : 0; ?></span></li>
+                    <li>Cakes: <span id="clickCount1" data-cake><?php echo isset($current_cakes) ? $current_cakes : 0; ?></span></li>
                     <li>Currency: $<span id="cash"><?php echo isset($current_currency) ? $current_currency : 0; ?></span></li>
                 </ul>
             </div>
@@ -117,14 +124,17 @@
 
                 <h2>BALANCES</h2>
                     <ul>
-                        <li>Cakes: <span id="clickCount2"><?php echo isset($current_cakes) ? $current_cakes : 0; ?></span></li>
+                        <li>Cakes: <span id="clickCount2" data-cake><?php echo isset($current_cakes) ? $current_cakes : 0; ?></span></li>
                         <li>Cash: $<span id="money"><?php echo isset($current_currency) ? $current_currency : 0; ?></span></li>
                     </ul>
 
                 <h2>PRODUCTION</h2>
                     <ul>
-                        <li>Per Click: {}</li>
-                        <li>Cake Type: <span id="cakeDetails"></span></li>
+                        <li>Auto-Bake Rate: <?php echo isset($current_cps) ? $current_cps : 0; ?></li>
+                        <li>Click Power: <?php echo isset($current_clickPower) ? $current_clickPower : 0;?></li>
+                        <li>Multiplier Bonus: <?php echo isset($current_multiplier) ? $current_multiplier : 0; ?></li>
+                        <li>Total Cakes Per Click: <?php echo isset($current_clickPower) ? $current_clickPower * $current_multiplier : 0;?></li>
+                        <!-- <li>Cake Type: <span id="cakeDetails"></span></li> -->
                     </ul>
 
                 <h2>PROGRESS</h2>
@@ -154,9 +164,9 @@
 
 
         <!-- CAKE DETAILS -->
-         <script src="logic/Cake.js">
-            // const sessionId = ""; // Pass the session ID to the JavaScript file
-         </script>
+         <!-- <script src="logic/Cake.js"> -->
+            <!-- // const sessionId = ""; // Pass the session ID to the JavaScript file -->
+         <!-- </script> -->
 
          <!-- LOG IN REQUIREMENT -->
           <script src="logic/session_check/check_session.js"></script>

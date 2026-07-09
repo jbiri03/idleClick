@@ -25,7 +25,7 @@ class ClickBooster extends Upgrades{
     }
 
     applyUpgrade(game){
-        game.clickPower = this.bonus;
+        game.clickPower += this.bonus;
     }
 }
 

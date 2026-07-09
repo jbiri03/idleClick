@@ -31,6 +31,14 @@ if (isset($_SESSION['user_id'])) {
             $current_cps = (int)$player_data['cps'];
             $current_bonus = (int)$player_data['bonus'];
         }
+        else {
+                $current_cakes = 0;
+                $current_currency = 0;
+                $current_multiplier = 1;
+                $current_clickPower = 1;
+                $current_cps = 0;
+                $current_bonus = 0;
+        }
 
     } catch (\PDOException $e) {
         echo "Database connection failed: " . $e->getMessage();
@@ -72,7 +80,7 @@ if (isset($_SESSION['user_id'])) {
 
             <!-- SELL -->
             <div id="sellSect">
-                <p>Cakes: <span id = cakeCount><?php echo $current_cakes; ?></span></p>
+                <p>Cakes: <span id = cakeCount data-cake><?php echo $current_cakes; ?></span></p>
                 <p>Current Market Price: $<span id="cakePrice">0</span></p>
                 <button id="sell-button">Sell Cakes</button>
             </div>
@@ -86,14 +94,16 @@ if (isset($_SESSION['user_id'])) {
 
                 <h2>BALANCES</h2>
                     <ul>
-                        <li>Cakes: <span id="cakeStat"><?php echo $current_cakes; ?></span></li>
+                        <li>Cakes: <span id="cakeStat" data-cake><?php echo $current_cakes; ?></span></li>
                         <li>Cash: $<span id="currency"><?php echo $current_currency; ?></span></li>
                     </ul>
 
                 <h2>PRODUCTION</h2>
                     <ul>
-                        <li>Per Click: {}</li>
-                        <li>Cake Type: <span id="cakeDetails"></span></li>
+                        <li>Click Power: <?php echo $current_clickPower ?></li>
+                        <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
+                        <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
+                        <!-- <li>Cake Type: <span id="cakeDetails"></span></li> -->
                     </ul>
 
                 <h2>PROGRESS</h2>
@@ -116,9 +126,12 @@ if (isset($_SESSION['user_id'])) {
 
         <!-- SCRIPTS -->
         <!-- CAKE DETAILS -->
-        <script src="logic/Cake.js"></script>
+        <!-- <script src="logic/Cake.js"></script> -->
 
         <!-- SELL SCRIPT -->
         <script src="logic/sell.js"></script>
+        
+        <!-- GAME LOGIC -->
+        <!-- <script type="module" src="logic/game.js"></script> -->
     </body>
 </html>

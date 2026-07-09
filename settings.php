@@ -34,16 +34,31 @@ $current_currency = 0;
 
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare("SELECT cakes, currency FROM player_save WHERE id = :user_id");
+            // LOAD FULL GAME STATE
+            $stmt = $pdo->prepare("
+                SELECT cakes, currency, multiplier, clickPower, cps, bonus
+                FROM player_save
+                WHERE id = :user_id
+            ");
+
             $stmt->execute([':user_id' => $_SESSION['user_id']]);
             $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if($player_data) {
                 $current_cakes = (int)$player_data['cakes'];
                 $current_currency = (int)$player_data['currency'];
-
-                
-            } else {
+                $current_multiplier = (int)$player_data['multiplier'];
+                $current_clickPower = (int)$player_data['clickPower'];
+                $current_cps = (int)$player_data['cps'];
+                $current_bonus = (int)$player_data['bonus'];
+            }
+            else {
+                $current_cakes = 0;
+                $current_currency = 0;
+                $current_multiplier = 1;
+                $current_clickPower = 1;
+                $current_cps = 0;
+                $current_bonus = 0;
             }
 
             $userStmt = $pdo->prepare("SELECT email, username FROM users WHERE id = :user_id");
@@ -147,8 +162,10 @@ $current_currency = 0;
 
                 <h2>PRODUCTION</h2>
                     <ul>
-                        <li>Per Click: {}</li>
-                        <li>Cake Type: <span id="cakeDetails"></span></li>
+                        <li>Click Power: <?php echo $current_clickPower ?></li>
+                        <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
+                        <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
+                        <!-- <li>Cake Type: <span id="cakeDetails"></span></li> -->
                     </ul>
 
                 <h2>PROGRESS</h2>
@@ -163,7 +180,7 @@ $current_currency = 0;
 
         <!-- SCRIPTS -->
         <!-- CAKE DETAILS -->
-        <script src="logic/Cake.js"></script>
+        <!-- <script src="logic/Cake.js"></script> -->
 
 
     </body>
