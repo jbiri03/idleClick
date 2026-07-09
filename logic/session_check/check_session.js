@@ -2,12 +2,13 @@ const buttons = [
     document.getElementById('saveButton'), 
     document.getElementById('sellButton'),
     document.getElementById('upgradesButton'),
-    document.getElementById('petsButton'),
+    // document.getElementById('petsButton'),
     document.getElementById('prestigeButton'),
-    document.getElementById('inventoryButton'),
-    document.getElementById('dailyButton'),
+    // document.getElementById('inventoryButton'),
+    // document.getElementById('dailyButton'),
     document.getElementById('clicker'),
-    document.getElementById('homeButton')
+    document.getElementById('homeButton'),
+    document.getElementById('settingsButton')
 ];
 
 const loginButton = document.getElementById('loginButton');

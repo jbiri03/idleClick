@@ -1,9 +1,13 @@
 <?php
     session_start();
+    //INITIALIZE VARIABLES
+    $current_cakes = 0;
+    $current_currency = 0;
+
     require_once __DIR__ . '/php/config.php';
 
-    $clicks = isset($_POST['clicks']) ? $_POST['clicks'] : 0;
-    $currency = isset($_POST['currency']) ? $_POST['currency'] : 0;
+    // $clicks = isset($_POST['cakeCount']) ? $_POST['cakeCount'] : 0;
+    // $currency = isset($_POST['currency']) ? $_POST['currency'] : 0;
 
     if(isset($_SESSION['user_id'])) {
         try {
@@ -12,13 +16,18 @@
 
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare("SELECT cakes, currency FROM player_save WHERE id = :user_id");
+            $stmt = $pdo->prepare("SELECT cakes, currency, multiplier, clickPower, cps, bonus FROM player_save WHERE id = :user_id");
             $stmt->execute([':user_id' => $_SESSION['user_id']]);
             $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if($player_data) {
                 $current_cakes = (int)$player_data['cakes'];
                 $current_currency = (int)$player_data['currency'];
+                $current_multiplier = $player_data['multiplier'];
+                $current_clickPower = $player_data['clickPower'];
+                $current_cps = $player_data['cps'];
+                $current_bonus = $player_data['bonus'];
+
 
                 
             } else {
@@ -50,9 +59,10 @@
                     <li><a href="index.php"><button id = "homeButton">Home</button></a></li>
                     <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
                     <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
-                    <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
                     <li><a href="prestige.html"><button id = "prestigeButton">Prestige</button></a></li>
-                    <li><a href="inventory.html"><button id = "inventoryButton">Inventory</button></a> </li>
+                    <li><a href="settings.php"><button id = "settingsButton">Settings</button></a></li>
+                    <!-- <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
+                    <li><a href="inventory.html"><button id = "inventoryButton">Inventory</button></a> </li> -->
                 </ul>
             </div>
         </div>
@@ -64,8 +74,8 @@
 
             <!-- SELL -->
             <div id="sellSect">
-                <p>Cake to sell: <span id = cakeCount><?php echo $current_cakes; ?></span></p>
-                <p>Current Price: $<span id="cakePrice">0</span></p>
+                <p>Cakes: <span id = cakeCount><?php echo $current_cakes; ?></span></p>
+                <p>Current Market Price: $<span id="cakePrice">0</span></p>
                 <button id="sell-button">Sell Cakes</button>
             </div>
         </div>
@@ -95,6 +105,13 @@
                     </ul>
 
                 <button>SHARE</button>
+                <div id="upgradeData" style="display:none;"
+                    data-multiplier="<?php echo $current_multiplier; ?>"
+                    data-clickpower="<?php echo $current_clickPower; ?>"
+                    data-cps="<?php echo $current_cps; ?>"
+                    data-bonus="<?php echo $current_bonus; ?>">
+                </div>
+
             </div>
         </div>
 
@@ -104,8 +121,5 @@
 
         <!-- SELL SCRIPT -->
         <script src="logic/sell.js"></script>
-
-        <!-- LOGIN REQUIREMENT -->
-         <script src = "logic/session_check/sell_session_check.js"></script>
     </body>
 </html>

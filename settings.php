@@ -1,11 +1,28 @@
 <?php
-    session_start();
+session_start();
 
-    //INITIALIZE VARIABLES
-    $current_cakes = 0;
-    $current_currency = 0;
+// INITIALIZE VARIABLES
+// ERROR MSGS
+$errMsg = '';
+$emailErr = '';
+$passwordErr = '';
+
+// SUCCESS MSGS
+$passwordSuccessMsg = '';
+$emailSuccessMsg = '';
+$usernameSuccessMsg = '';
+
+// PLAYER DATA
+$current_username = '';
+$current_email = '';
+$current_cakes = 0;
+$current_currency = 0;
 
     require_once __DIR__ . '/php/config.php';
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        require __DIR__ . '/php/modify.php';
+    }
 
     $clicks = isset($_POST['clicks']) ? $_POST['clicks'] : 0;
     $currency = isset($_POST['currency']) ? $_POST['currency'] : 0;
@@ -29,12 +46,25 @@
             } else {
             }
 
+            $userStmt = $pdo->prepare("SELECT email, username FROM users WHERE id = :user_id");
+            $userStmt->execute([':user_id' => $_SESSION['user_id']]);
+            $user_data = $userStmt->fetch(\PDO::FETCH_ASSOC);
+
+            if($user_data) {
+                $current_username = htmlspecialchars($user_data['username']);
+                $current_email = htmlspecialchars($user_data['email']);
+            } else {
+                echo "User data not found.";
+            }
+
         } catch (\PDOException $e) {
             echo "Database connection failed: " . $e->getMessage();
         }
     } else {
         header("Location: index.php");
     }
+
+   
 ?>
 
 <!DOCTYPE html>
@@ -65,30 +95,41 @@
         <!-- <a href="shop.html"><button>Shop</button></a> -->
 
         <div class="column2">
-            <!-- UPGRADES -->
-             <div id="upgradeSect">
-                <h1>Upgrades</h1>
-                <!-- SEARCH BAR -->
-                <input type="text" placeholder="Search..">
-                    <div id = "upgradeTable">
-                        <table>
-                            <tr>
-                                <th>Upgrade</th>
-                                <th>Effect</th>
-                                <th>Cost</th>
-                            </tr>
-                            <tr>
-                                <td><button id="upgradeSugar1">More Sugar I</button></td>
-                                <td>x2 Cakes per Click</td>
-                                <td>$3000</td>
-                            </tr>
-                            <tr>
-                                <td><button id="upgradeClick1">Click Booster I</button></td>
-                                <td>+1 cake per click</td>
-                                <td>$150</td>
-                            </tr>
-                        </table>
-                    </div>
+             <div id="settingsSect">
+                <h1>Settings</h1>
+
+                <!-- ACCOUNT DETAILS -->
+                <h2>Account Details</h2>
+                <p>Current Username: <?php echo $current_username ?></p>
+                <p>Current Email: <?php echo $current_email ?></p>
+
+                <!-- MODIFY ACCOUNT -->
+                <form method="POST">
+                    <h3>Change Username</h3>
+                        <label for="newUsername">New Username:</label>
+                        <input type="text" id="newUsername" name="newUsername">
+                        <label for="confirmUsername">Confirm Username:</label>
+                        <input type="text" id="confirmUsername" name="confirmUsername"><br>
+                        <p class = "error"><?php echo $errMsg ?></p>
+                        <p class = "success"><?php echo $usernameSuccessMsg ?></p>
+
+                    <h3>Change Email</h3>
+                        <label for="newEmail">New Email:</label>
+                        <input type="text" id="newEmail" name="newEmail">
+                        <label for="confirmEmail">Confirm Email:</label>
+                        <input type="text" id="confirmEmail" name="confirmEmail"><br>
+                        <p class = "error"><?php echo $emailErr ?></p>
+                        <p class = "success"><?php echo $emailSuccessMsg ?></p>
+
+                    <h3>Change Password</h3>
+                        <label for="newPassword">New Password:</label>
+                        <input type="password" id="newPassword" name="newPassword">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword"><br>
+                        <p class = "error"><?php echo $passwordErr ?></p>
+                        <p class = "success"><?php echo $passwordSuccessMsg ?></p>
+                    <button>Apply Changes</button>
+                </form>
              </div>
         </div>
 
@@ -124,9 +165,6 @@
         <!-- CAKE DETAILS -->
         <script src="logic/Cake.js"></script>
 
-        <!-- UPGRADES SCRIPT -->
-        <script type="module" src="logic/game.js"></script>
-        <script type="module" src="logic/upgradesPage.js"></script>
 
     </body>
 </html>

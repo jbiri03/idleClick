@@ -1,14 +1,43 @@
 const sellButton = document.getElementById("sell-button");
 let currency = parseFloat(document.getElementById("currency").textContent);
 let cakeCount = parseFloat(document.getElementById("cakeCount").textContent);
-let cakePrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10; // Random price between 10 and 100
+let cakePrice = sessionStorage.getItem("cakePrice") // Random price between 10 and 100
+let nextCakePriceUpdate = parseInt(sessionStorage.getItem("nextCakePriceUpdate"), 10);
+const CAKE_PRICE_INTERVAL = 30000; //TIME TIL UPDATE
+
+
+if(cakePrice === null || isNaN(nextCakePriceUpdate)){
+    cakePrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+    nextCakePriceUpdate = Date.now() + CAKE_PRICE_INTERVAL;
+
+    sessionStorage.setItem("cakePrice", cakePrice);
+    sessionStorage.setItem("nextCakePriceUpdate", nextCakePriceUpdate);
+} else {
+    cakePrice = parseInt(cakePrice, 10);
+
+    if(Date.now() >= nextCakePriceUpdate){
+        cakePrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+        nextCakePriceUpdate = Date.now() + CAKE_PRICE_INTERVAL
+
+        sessionStorage.setItem("cakePrice", cakePrice);
+        sessionStorage.setItem("nextCakePriceUpdate", nextCakePriceUpdate);
+    }
+}
+
 document.getElementById("cakePrice").textContent = cakePrice; // Display the initial cake price
 
 function updateCakePrice() {
-    cakePrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10; // Random price between 10 and 100
-    console.log("Updated cake price: " + cakePrice);
-    document.getElementById("cakePrice").textContent = cakePrice; // Update the displayed cake price
-}
+    if (Date.now() >= nextCakePriceUpdate){
+        cakePrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10; // Random price between 10 and 100
+        nextCakePriceUpdate = Date.now() + CAKE_PRICE_INTERVAL;
+
+        sessionStorage.setItem("cakePrice", cakePrice)
+        sessionStorage.setItem("nextCakePriceUpdate", nextCakePriceUpdate);
+
+        console.log("Updated cake price: " + cakePrice);
+        document.getElementById("cakePrice").textContent = cakePrice; // Update the displayed cake price
+    }
+}  
 
 
 
@@ -20,6 +49,8 @@ sellButton.addEventListener("click", () => {
     document.getElementById("currency").textContent = currency;
     document.getElementById("cakeCount").textContent = newCakeCount; // Reset cake count to 0 after selling
     document.getElementById("cakeStat").textContent = newCakeCount; // Reset cake stat to 0 after selling
+
+    cakeCount = newCakeCount
 
     var dataToSend = encodeURIComponent(currency);
     var clicks = encodeURIComponent(newCakeCount); // Get the current cake count
@@ -42,4 +73,4 @@ sellButton.addEventListener("click", () => {
 });
 
 
-setInterval(updateCakePrice, 60000); // Call the function to update the cake price every 60 seconds
+setInterval(updateCakePrice, 1000); // Call the function to check cake price every second

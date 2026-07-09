@@ -2,6 +2,10 @@
     session_start();
     require_once __DIR__ . '/php/config.php';
 
+    //INITIALIZE VARIABLES
+    $current_cakes = 0;
+    $current_currency = 0;
+
     $session_id = session_id();
 
 
@@ -15,17 +19,21 @@
 
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare("SELECT cakes, currency FROM player_save WHERE id = :user_id");
+            $stmt = $pdo->prepare("SELECT cakes, currency, multiplier, clickPower, cps, bonus FROM player_save WHERE id = :user_id");
             $stmt->execute([':user_id' => $_SESSION['user_id']]);
             $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if($player_data) {
                 $current_cakes = (int)$player_data['cakes'];
                 $current_currency = (int)$player_data['currency'];
+                $current_multiplier = (int)$player_data['multiplier'];
+                $current_clickPower = (int)$player_data['clickPower'];
+                $current_cps = (int)$player_data['cps'];
+                $current_bonus = (int)$player_data['bonus'];
+
 
                 
             } else {
-                echo "Player data not found.";
             }
 
         } catch (\PDOException $e) {
@@ -50,9 +58,10 @@
                     <li><a href="index.php"><button id = "homeButton">Home</button></a></li>
                     <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
                     <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
-                    <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
                     <li><a href="prestige.html"><button id = "prestigeButton">Prestige</button></a></li>
-                    <li><a href="inventory.html"><button id ="inventoryButton">Inventory</button></a> </li>
+                    <li><a href="settings.php"><button id = "settingsButton">Settings</button></a></li>
+                    <!-- <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
+                    <li><a href="inventory.html"><button id ="inventoryButton">Inventory</button></a> </li> -->
                 </ul>
             </div>
         </div>
@@ -65,7 +74,7 @@
 
             <div id="topBar">
                 <a href="php/login.php"><button id = "loginButton">Login or Register</button></a>
-                <button id = "dailyButton">Daily Bonus</button>
+                <!-- <button id = "dailyButton">Daily Bonus</button> -->
                 <button id="saveButton">Save Game</button>
                 <button id = "logOut">Log Out</button>
                 <?php 
@@ -123,6 +132,13 @@
                         <li>Prestige Multiplier: {}</li>
                         <li>Current Prestige Level: {} </li>
                     </ul>
+                <div id="upgradeData" style="display:none;"
+                    data-multiplier="<?php echo $current_multiplier; ?>"
+                    data-clickpower="<?php echo $current_clickPower; ?>"
+                    data-cps="<?php echo $current_cps; ?>"
+                    data-bonus="<?php echo $current_bonus; ?>">
+            </div>
+
 
                 <button>SHARE</button>
             </div>
@@ -130,7 +146,12 @@
 
         <!-- SCRIPTS -->
         <!-- CLICK COUNTER -->
-        <script src="logic/clicker.js"></script>
+        <!-- GAME STATE + UPGRADE SYSTEM -->
+        <script type="module" src="logic/game.js"></script>
+
+        <!-- CLICKING LOGIC-->
+        <script type="module" src="logic/clicker.js"></script>
+
 
         <!-- CAKE DETAILS -->
          <script src="logic/Cake.js">

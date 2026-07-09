@@ -8,7 +8,7 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currency = $_POST['currency'];
-        $newCakeCount = $_POST['newCakeCount'] ?? 0; // Get the new cake count from the POST data
+        $newCakeCount = $_POST['cakeCount'] ?? 0; // Get the new cake count from the POST data
         echo "Currency updated successfully. Amount: " . htmlspecialchars($currency);
         echo " Cake count received: " . htmlspecialchars($newCakeCount);
         $stmt = $pdo->prepare("UPDATE player_save SET cakes = :cakeCount, currency = :currency WHERE id = :user_id");

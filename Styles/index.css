@@ -85,6 +85,10 @@ html, body{
     color: black;
 }
 
+#topBar #settingsButton{
+    float: right;
+}
+
 .welcome-message{
     text-align: center;
     font-size: 200%;
@@ -162,4 +166,54 @@ html, body{
     text-align: center;
     margin-top: 10%;
     padding: 10px 0px;
+}
+
+/* UPGRADES PAGE */
+#upgradeSect{
+    text-align: center;
+    margin: auto;
+}
+
+#upgradeTable table, td, th{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid;
+}
+
+#upgradeTable table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#upgradeTable table button{
+    width: 100%;
+    padding: 10px;
+}
+
+
+
+/* SETTINGS PAGE */
+
+#settingsSect{
+    text-align: center;
+    background-color: aliceblue;
+}
+
+
+#settingsSect label{
+    padding-left: 30px;
+}
+
+#settingsSect button{
+    margin: 10px;
+    padding: 10px;
+}
+
+.error{
+    color: red;
+}
+
+.success{
+    color: green;
 }
