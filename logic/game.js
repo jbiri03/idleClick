@@ -10,10 +10,18 @@ export const game = {
 };
 
 export const upgrades = [
-    new SugarMultiplier("More Sugar", 3000, 2),
-    new ClickBooster("Stronger Clicks", 100, 5),
-    new AutoBaker("Basic Auto Baker", 200, 1)
+    new SugarMultiplier("More Sugar I", 3000, 2),
+    new ClickBooster("Stronger Clicks I", 10000, 5),
+    new AutoBaker("Basic Auto Baker I", 20000, 1)
 ];
+
+//SAVE UPGRADES
+function saveUpgradeToServer(upgradeName) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "php/save_upgrade.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("upgrade_name=" + encodeURIComponent(upgradeName));
+}
 
 export function buyUpgrade(upgrade) {
     console.log("Attempting to buy:", upgrade.name);
@@ -22,15 +30,19 @@ export function buyUpgrade(upgrade) {
     if (game.currency >= upgrade.cost) {
         console.log("Purchase successful.");
         game.currency -= upgrade.cost;
-        upgrade.applyUpgrade(game);   // polymorphism
+        upgrade.applyUpgrade(game);
+
+        upgrade.purchased = true;
+
+        //SAVE UPGRADES PERMANENTLY
+        saveUpgradeToServer(upgrade.name);
 
         const moneyElement = document.getElementById("money");
 
-        //UPDATE UI
         if (moneyElement) {
             moneyElement.textContent = game.currency;
 
-            // SAVE TO DATABASE
+            //SAVE GAME STATE
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "php/save_game.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -45,20 +57,21 @@ export function buyUpgrade(upgrade) {
                 }
             };
 
-            xhr.send("currency=" + encodeURIComponent(game.currency) + 
-                    "&clicks=" + encodeURIComponent(game.sugar) +
-                    "&multiplier=" + encodeURIComponent(game.multiplier) +
-                    "&clickPower=" + encodeURIComponent(game.clickPower) +
-                    "&cps=" + encodeURIComponent(game.cps) +
-                    "&bonus=" + encodeURIComponent(game.bonus)
-                );
+            xhr.send(
+                "currency=" + encodeURIComponent(game.currency) + 
+                "&clicks=" + encodeURIComponent(game.sugar) +
+                "&multiplier=" + encodeURIComponent(game.multiplier) +
+                "&clickPower=" + encodeURIComponent(game.clickPower) +
+                "&cps=" + encodeURIComponent(game.cps) +
+                "&bonus=" + encodeURIComponent(game.bonus)
+            );
 
             return true;
-    }
+        }
+
         console.log("Game state after upgrade:", game);
     } else {
         console.log("Not enough currency to buy:", upgrade.name);
         return false;
     }
 }
-

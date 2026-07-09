@@ -1,4 +1,4 @@
-class Upgrades {
+ class Upgrades {
     constructor(name, cost) {
         this.name = name;
         this.cost = cost;
@@ -25,7 +25,7 @@ class ClickBooster extends Upgrades{
     }
 
     applyUpgrade(game){
-        game.bonus += this.bonus;
+        game.clickPower = this.bonus;
     }
 }
 

@@ -3,6 +3,17 @@ import { game, upgrades, buyUpgrade } from "./game.js";
 const upgradeSugar1 = document.getElementById("upgradeSugar1");
 const upgradeClick1 = document.getElementById("upgradeClick1");
 
+const Sugar1Purchased = upgradeSugar1.hasAttribute("disabled");
+const Click1Purchased = upgradeClick1.hasAttribute("disabled");
+
+if (Sugar1Purchased) {
+    upgradeSugar1.textContent = "Purchased";
+}
+
+if (Click1Purchased) {
+    upgradeClick1.textContent = "Purchased";
+}
+
 
 // Load saved cakes from PHP
 game.sugar = parseInt(document.getElementById("cakeStat")).textContent || 0;
@@ -23,10 +34,10 @@ upgradeSugar1.addEventListener("click", () => {
 
 });
 
-// upgradeClick1.addEventListener("click", () => {
-//     if(buyUpgrade(upgrades[1])){
-//         console.log("After buying Click upgrade:", game);
-//         upgradeClick1.disabled = true;
-//         upgradeClick1.textContent = "Purchased";
-//     }
-// });
+upgradeClick1.addEventListener("click", () => {
+    if(buyUpgrade(upgrades[1])){
+        console.log("After buying Click upgrade:", game);
+        upgradeClick1.disabled = true;
+        upgradeClick1.textContent = "Purchased";
+    }
+});

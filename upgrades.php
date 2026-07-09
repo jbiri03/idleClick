@@ -35,6 +35,26 @@
     } else {
         header("Location: index.php");
     }
+
+        // LOAD PURCHASED UPGRADES
+    $purchased_upgrades = [];
+
+    $stmt2 = $pdo->prepare("
+        SELECT upgrade_name, purchased
+        FROM player_upgrades
+        WHERE user_id = :user_id
+    ");
+
+    $stmt2->execute([':user_id' => $_SESSION['user_id']]);
+
+    while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+        $purchased_upgrades[$row['upgrade_name']] = $row['purchased'];
+    }
+
+    $Sugar1Purchased = $purchased_upgrades["More Sugar I"] ?? 0;
+    $Click1Purchased = $purchased_upgrades["Stronger Clicks I"] ?? 0;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -78,14 +98,14 @@
                                 <th>Cost</th>
                             </tr>
                             <tr>
-                                <td><button id="upgradeSugar1">More Sugar I</button></td>
-                                <td>x2 Cakes per Click</td>
+                                <td><button id="upgradeSugar1" <?php if ($Sugar1Purchased) echo "disabled"; ?>> <?php echo $Sugar1Purchased ? "Purchased" : "More Sugar I"; ?></button></td>
+                                <td>x2 Cakes Per Click</td>
                                 <td>$3000</td>
                             </tr>
                             <tr>
-                                <td><button id="upgradeClick1">Click Booster I</button></td>
-                                <td>+1 cake per click</td>
-                                <td>$150</td>
+                                <td><button id="upgradeClick1" <?php if ($Click1Purchased) echo "disabled"; ?>> <?php echo $Click1Purchased ? "Purchased" : "Stronger Clicks I"; ?></button></td>
+                                <td>+5 Cakes Per click</td>
+                                <td>$10000</td>
                             </tr>
                         </table>
                     </div>
