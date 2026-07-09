@@ -1,47 +1,45 @@
 <?php
-    session_start();
-    //INITIALIZE VARIABLES
-    $current_cakes = 0;
-    $current_currency = 0;
+session_start();
+require_once __DIR__ . '/php/config.php';
 
-    require_once __DIR__ . '/php/config.php';
+$current_cakes = 0;
+$current_currency = 0;
+$current_multiplier = 1;
+$current_clickPower = 1;
+$current_cps = 0;
+$current_bonus = 0;
 
-    // $clicks = isset($_POST['cakeCount']) ? $_POST['cakeCount'] : 0;
-    // $currency = isset($_POST['currency']) ? $_POST['currency'] : 0;
+if (isset($_SESSION['user_id'])) {
+    try {
+        $dsn = "sqlite:$db";
+        $pdo = new \PDO($dsn);
 
-    if(isset($_SESSION['user_id'])) {
-        try {
-            $dsn = "sqlite:$db";
-            $pdo = new \PDO($dsn);
+        $stmt = $pdo->prepare("
+            SELECT cakes, currency, multiplier, clickPower, cps, bonus
+            FROM player_save
+            WHERE id = :user_id
+        ");
 
-            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $stmt->execute([':user_id' => $_SESSION['user_id']]);
+        $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            $stmt = $pdo->prepare("SELECT cakes, currency, multiplier, clickPower, cps, bonus FROM player_save WHERE id = :user_id");
-            $stmt->execute([':user_id' => $_SESSION['user_id']]);
-            $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-            if($player_data) {
-                $current_cakes = (int)$player_data['cakes'];
-                $current_currency = (int)$player_data['currency'];
-                $current_multiplier = $player_data['multiplier'];
-                $current_clickPower = $player_data['clickPower'];
-                $current_cps = $player_data['cps'];
-                $current_bonus = $player_data['bonus'];
-
-
-                
-            } else {
-                echo "Player data not found.";
-            }
-
-        } catch (\PDOException $e) {
-            echo "Database connection failed: " . $e->getMessage();
+        if ($player_data) {
+            $current_cakes = (int)$player_data['cakes'];
+            $current_currency = (int)$player_data['currency'];
+            $current_multiplier = (float)$player_data['multiplier'];
+            $current_clickPower = (int)$player_data['clickPower'];
+            $current_cps = (int)$player_data['cps'];
+            $current_bonus = (int)$player_data['bonus'];
         }
-    } else {
-        header("Location: index.php");
-    }
 
+    } catch (\PDOException $e) {
+        echo "Database connection failed: " . $e->getMessage();
+    }
+} else {
+    header("Location: index.php");
+}
 ?>
+
 
 <!DOCTYPE html>
     <html lang="en">
@@ -111,6 +109,7 @@
                     data-cps="<?php echo $current_cps; ?>"
                     data-bonus="<?php echo $current_bonus; ?>">
                 </div>
+
 
             </div>
         </div>

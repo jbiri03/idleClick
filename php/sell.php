@@ -7,18 +7,26 @@ try {
     $pdo = new \PDO($dsn);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $currency = $_POST['currency'];
-        $newCakeCount = $_POST['cakeCount'] ?? 0; // Get the new cake count from the POST data
+
+        $currency = $_POST['currency'] ?? 0;
+        $newCakeCount = $_POST['cakeCount'] ?? 0;
+
         echo "Currency updated successfully. Amount: " . htmlspecialchars($currency);
         echo " Cake count received: " . htmlspecialchars($newCakeCount);
-        $stmt = $pdo->prepare("UPDATE player_save SET cakes = :cakeCount, currency = :currency WHERE id = :user_id");
+
+        $stmt = $pdo->prepare("
+            UPDATE player_save 
+            SET cakes = :cakeCount,
+                currency = :currency
+            WHERE id = :user_id
+        ");
+
         $stmt->execute([
-            ':user_id' => $_SESSION['user_id'] ?? null,
+            ':user_id' => $_SESSION['user_id'],
             ':cakeCount' => $newCakeCount,
-            ':currency' => $currency,
+            ':currency' => $currency
         ]);
-    }
-    else {
+    } else {
         echo "No data received.";
     }
 
