@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head> 
 <body>
     <!-- LOGIN FORM -->
+     <a href="../index.php" id="backBtn">← Back</a>
     <form id="loginForm" method="POST" action="">
         <ul>
             <?php 

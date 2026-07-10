@@ -117,6 +117,8 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     transition: 0.15s ease;
     image-rendering: pixelated;
+    animation: cakePulse 1.4s ease-in-out infinite;
+
 }
 
 #cake button img:hover {
@@ -126,6 +128,12 @@ body {
 #cake button img:active{
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+}
+
+@keyframes cakePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 /* AUTO BAKER */
