@@ -111,10 +111,11 @@
             </div>
 
             <!-- CLICKER IMAGE -->
+            <div id="autoBakeIndicator" style="display:none;">🎂 Auto‑Baking...</div>
             <div id="cake">
                 <button id="clicker"><img src="Images/Cake_Placeholder.jpg" alt="Cake"></button>
             </div>
-            <div id="autoBakeIndicator" style="display:none;">Auto‑Baking…</div>
+
 
         </div>
 
