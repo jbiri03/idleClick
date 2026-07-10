@@ -105,7 +105,7 @@ body {
 #cake button {
     display: block;
     margin: 20px auto;
-    width: 70%;
+    width: 55%;
     background: none;
     border: none;
     cursor: pointer;
@@ -116,6 +116,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     transition: 0.15s ease;
+    image-rendering: pixelated;
 }
 
 #cake button img:hover {
