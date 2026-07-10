@@ -1,65 +1,141 @@
+/* GLOBAL */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #fffaf3; /* soft cream */
+    font-family: 'Trebuchet MS', sans-serif;
+    color: #5a4633;
+}
 
-#loginForm{
+/* CENTERING */
+body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    min-height: 100vh;
 }
 
-#loginForm ul li{
-    list-style-type: none;
+/* FORM */
+#loginForm {
+    background-color: #fff7e6;
+    border: 3px solid #e3c27d;
+    border-radius: 14px;
+    padding: 30px 40px;
+    width: 380px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-#loginForm #usernameInput{
-    padding: 5px 0px;
+#loginForm ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-#loginForm #passwordInput{
-    padding: 5px 0px;
+
+/* LABELS */
+#loginForm label {
+    font-size: 18px;
+    color: #b06f2a;
 }
 
-span{
-    padding: 0px 5px ;
+#loginForm input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 2px solid #e3c27d;
+    background-color: #fffaf0;
+    font-size: 16px;
+    color: #5a4633;
+    transition: 0.2s ease;
+}
+
+#loginForm input:focus {
+    outline: none;
+    background-color: #fff2d9;
+    transform: scale(1.02);
+}
+
+
+/* SUBMIT */
+#loginForm button {
+    width: 100%;
+    padding: 14px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #e09a4a;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-top: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+#loginForm button:hover {
+    background-color: #f0a85a;
+    transform: scale(1.05);
+}
+
+
+
+#loginForm span {
     color: red;
+    font-size: 14px;
+    margin-left: 4px;
 }
 
-/* REQUIREMENTS DISPLAY */
-/* The message box is shown when the user clicks on the password field */
+.success-message {
+    background-color: #d4f8d4;
+    border: 2px solid #7ac27a;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #3f7a3f;
+    font-weight: bold;
+}
+
+
+/* PASSWORD BOX */
 #message {
-  display:none;
-  color: #000;
-  position: relative;
-  padding: 0px;
-  margin-top: 0px;
-  position:fixed;
+    background-color: #fff2d9;
+    border: 2px solid #e3c27d;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#message h3 {
+    margin-top: 0;
+    color: #b06f2a;
 }
 
 #message p {
-  padding: 10px 35px;
-  font-size: 18px;
+    margin: 6px 0;
+    font-size: 15px;
 }
 
-/* Add a green text color and a checkmark when the requirements are right */
-.valid {
-  color: green;
-}
-
-.valid:before {
-  position: relative;
-  left: -35px;
-  content: "\2714";
-}
-
-/* Add a red text color and an "x" icon when the requirements are wrong */
 .invalid {
-  color: red;
+    color: #c45a5a;
 }
 
-.invalid:before {
-  position: relative;
-  left: -35px;
-  content: "\2716";
+.valid {
+    color: #4caf50;
 }
 
 
+/* REGISTRATION */
+#loginForm a {
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #b06f2a;
+    font-size: 16px;
+    text-decoration: none;
+}
 
+#loginForm a:hover {
+    text-decoration: underline;
+}

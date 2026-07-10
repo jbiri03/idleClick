@@ -122,6 +122,11 @@ body {
     transform: scale(1.03);
 }
 
+#cake button img:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
 /* STATS PANEL */
 .column3 {
     width: 28%;
@@ -239,4 +244,68 @@ body {
     outline: none;
     background-color: #fff2d9;
     transform: scale(1.02);
+}
+
+/* UPGRADE TABLE */
+#upgradeSect h1 {
+    text-align: center;
+    color: #b06f2a;
+    margin-bottom: 20px;
+}
+
+#upgradeTable table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff7e6;
+    border: 3px solid #e3c27d;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#upgradeTable th {
+    background-color: #ffe0e8;
+    padding: 14px;
+    font-size: 20px;
+    color: #5a4633;
+    border-bottom: 3px solid #e3c27d;
+}
+
+#upgradeTable td {
+    padding: 14px;
+    font-size: 18px;
+    color: #5a4633;
+    text-align: center;
+    border-bottom: 1px solid #f0d9b5;
+}
+
+/* HOVER */
+#upgradeTable tr:hover {
+    background-color: #fff2d9;
+}
+
+/* UPGRADE BUTTON */
+#upgradeTable button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ffe9f0;
+    color: #5a4633;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+#upgradeTable button:hover:not(:disabled) {
+    background-color: #ffdae6;
+    transform: scale(1.05);
+}
+
+#upgradeTable button:disabled {
+    background-color: #d7c7b0;
+    color: #7a6a55;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
