@@ -19,7 +19,6 @@ if (window.__upgradesPageLoaded) {
     const autoBake2 = document.getElementById("autoBake2");
     const autoBake3 = document.getElementById("autoBake3");
 
-
     //LOAD GAME STATE
     game.sugar = parseInt(document.getElementById("cakeStat").textContent) || 0;
     game.currency = parseInt(document.getElementById("money").textContent) || 0;
@@ -60,9 +59,7 @@ if (window.__upgradesPageLoaded) {
         });
     });
 
-    /* -------------------------------------------------------
-       UI UPDATE FUNCTION
-    ---------------------------------------------------------*/
+    //UI UPDATE
     function updateStatsUI() {
         document.getElementById("clickPowerStat").textContent = game.clickPower;
         document.getElementById("multiplierStat").textContent = game.multiplier;
@@ -73,5 +70,29 @@ if (window.__upgradesPageLoaded) {
         productionList.children[1].textContent = `Click Power: ${game.clickPower}`;
         productionList.children[2].textContent = `Multiplier Bonus: ${game.multiplier}`;
         productionList.children[3].textContent = `Total Cakes Per Click: ${game.clickPower * game.multiplier}`;
+    }
+
+    /* -------------------------------------------------------
+       UPGRADE SEARCH BAR — FIXED
+    ---------------------------------------------------------*/
+    const searchInput = document.getElementById("upgradeSearch");
+
+    if (searchInput) {
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase().trim();
+
+            upgradeMap.forEach(({ btn }) => {
+                if (!btn) return;
+
+                const text = btn.textContent.toLowerCase();
+                const row = btn.closest("tr");
+
+                if (text.includes(query)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
     }
 }

@@ -107,7 +107,14 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
     <div id="upgradeSect">
         <h1>Upgrades</h1>
 
-        <input type="text" placeholder="Search..">
+        <div id="upgradeSearchContainer">
+            <input 
+            type="text" 
+            id="upgradeSearch" 
+            placeholder="Search upgrades..."
+        >
+        </div>
+
 
         <div id="upgradeTable">
             <table>
