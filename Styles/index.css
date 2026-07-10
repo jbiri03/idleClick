@@ -127,6 +127,22 @@ body {
     transform: translateY(4px);
 }
 
+/* AUTO BAKER */
+#autoBakeIndicator {
+    font-size: 20px;
+    color: #b06f2a;
+    text-align: center;
+    margin-top: 10px;
+    animation: bakePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes bakePulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+
 /* STATS PANEL */
 .column3 {
     width: 28%;

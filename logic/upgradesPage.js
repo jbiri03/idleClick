@@ -72,9 +72,8 @@ if (window.__upgradesPageLoaded) {
         productionList.children[3].textContent = `Total Cakes Per Click: ${game.clickPower * game.multiplier}`;
     }
 
-    /* -------------------------------------------------------
-       UPGRADE SEARCH BAR — FIXED
-    ---------------------------------------------------------*/
+
+    //SEARCH BAR
     const searchInput = document.getElementById("upgradeSearch");
 
     if (searchInput) {
