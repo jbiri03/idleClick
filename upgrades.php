@@ -246,6 +246,11 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
 <span id="cpsStat" style="display:none;"><?php echo $current_cps; ?></span>
 <span id="bonusStat" style="display:none;"><?php echo $current_bonus; ?></span>
 
+<span id="prestigeMultiplierStat" style="display:none;"><?php echo $current_prestige_multiplier; ?></span>
+
+<span id="prestigePointsStat" style="display:none;"> <?php echo $current_prestige_points; ?></span>
+
+
 <!-- SCRIPTS -->
 <!-- <script src="logic/Cake.js"></script> -->
 <script type="module" src="logic/upgradesPage.js"></script>

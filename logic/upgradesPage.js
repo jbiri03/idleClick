@@ -27,6 +27,9 @@ if (window.__upgradesPageLoaded) {
     game.cps = parseInt(document.getElementById("cpsStat")?.textContent) || 0;
     game.bonus = parseInt(document.getElementById("bonusStat")?.textContent) || 0;
 
+    game.prestigeMultiplier = parseFloat(document.getElementById("prestigeMultiplierStat")?.textContent) || 1;
+
+
     console.log("Upgrades page initialized.");
     console.log("Loaded game state:", game);
 
