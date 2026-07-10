@@ -65,7 +65,7 @@
                     <li><a href="index.php"><button id = "homeButton">Home</button></a></li>
                     <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
                     <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
-                    <li><a href="prestige.html"><button id = "prestigeButton">Prestige</button></a></li>
+                    <li><a href="prestige.php"><button id = "prestigeButton">Prestige</button></a></li>
                     <li><a href="settings.php"><button id = "settingsButton">Settings</button></a></li>
                     <!-- <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
                     <li><a href="inventory.html"><button id ="inventoryButton">Inventory</button></a> </li> -->
