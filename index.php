@@ -19,7 +19,13 @@
 
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare("SELECT cakes, currency, multiplier, clickPower, cps, bonus FROM player_save WHERE id = :user_id");
+            $stmt = $pdo->prepare("
+                SELECT cakes, currency, multiplier, clickPower, cps, bonus, prestige_points, prestige_multiplier, prestige_level
+                FROM player_save
+                WHERE id = :user_id
+            ");
+
+
             $stmt->execute([':user_id' => $_SESSION['user_id']]);
             $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
@@ -31,6 +37,10 @@
                 $current_cps = (int)$player_data['cps'];
                 $current_bonus = (int)$player_data['bonus'];
 
+                $current_prestige_points     = (int)$player_data['prestige_points'];
+                $current_prestige_multiplier = (float)$player_data['prestige_multiplier'];
+                $current_prestige_level      = (int)$player_data['prestige_level'];
+
 
                 
             } else {
@@ -40,6 +50,9 @@
                 $current_clickPower = 1;
                 $current_cps = 0;
                 $current_bonus = 0;
+                $current_prestige_points     = 0;
+                $current_prestige_multiplier = 1.0;
+                $current_prestige_level      = 0;
 
             }
 
@@ -142,15 +155,22 @@
 
                 <h2>PROGRESS</h2>
                     <ul>
-                        <li>Prestige Multiplier: {}</li>
-                        <li>Current Prestige Level: {} </li>
+                        <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier; ?></li>
+                        <li>Current Prestige Level: <?php echo $current_prestige_level; ?></li>
                     </ul>
+
+                <!-- HIDDEN ELEMENTS -->
                 <div id="upgradeData" style="display:none;"
                     data-multiplier="<?php echo $current_multiplier; ?>"
                     data-clickpower="<?php echo $current_clickPower; ?>"
                     data-cps="<?php echo $current_cps; ?>"
                     data-bonus="<?php echo $current_bonus; ?>">
-            </div>
+                </div>
+                <span id="prestigeMultiplierStat" style="display:none;"><?php echo $current_prestige_multiplier; ?></span>
+                <span id="prestigePointsStat" style="display:none;"><?php echo $current_prestige_points; ?></span>
+
+
+
         </div>
 
         <!-- SCRIPTS -->

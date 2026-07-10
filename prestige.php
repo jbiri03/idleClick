@@ -19,7 +19,7 @@ if(isset($_SESSION['user_id'])) {
 
         // LOAD FULL GAME STATE
         $stmt = $pdo->prepare("
-            SELECT cakes, currency, multiplier, clickPower, cps, bonus
+            SELECT cakes, currency, multiplier, clickPower, cps, bonus, prestige_multiplier, prestige_level, prestige_points
             FROM player_save
             WHERE id = :user_id
         ");
@@ -33,7 +33,12 @@ if(isset($_SESSION['user_id'])) {
             $current_clickPower = (int)$player_data['clickPower'];
             $current_cps = (int)$player_data['cps'];
             $current_bonus = (int)$player_data['bonus'];
+
+            $current_prestige_multiplier = (float)$player_data['prestige_multiplier'];
+            $current_prestige_level = (int)$player_data['prestige_level'];
+            $current_prestige_points = (int)$player_data['prestige_points'];
         }
+
         else {
             $current_cakes = 0;
             $current_currency = 0;
@@ -41,6 +46,8 @@ if(isset($_SESSION['user_id'])) {
             $current_clickPower = 1;
             $current_cps = 0;
             $current_bonus = 0;
+            $current_prestige_multiplier = 1;
+            $current_prestige_level = 0;
         }
 
     } catch (\PDOException $e) {
@@ -113,7 +120,7 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
         </p>
 
         <p class="prestige-info">
-            Prestige Points Available: <strong id="prestigePoints">0</strong>
+            Prestige Points Available: <strong id="prestigePoints"><?php echo $current_cakes/1000?></strong>
         </p>
 
         <p class="prestige-info">
@@ -155,8 +162,8 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
 
         <h2>PROGRESS</h2>
         <ul>
-            <li>Prestige Multiplier: {}</li>
-            <li>Current Prestige Level: {} </li>
+            <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier; ?></li>
+            <li>Current Prestige Level: <?php echo $current_prestige_level; ?></li>
         </ul>
     </div>
 </div>
@@ -166,10 +173,16 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
 <span id="clickPowerStat" style="display:none;"><?php echo $current_clickPower; ?></span>
 <span id="cpsStat" style="display:none;"><?php echo $current_cps; ?></span>
 <span id="bonusStat" style="display:none;"><?php echo $current_bonus; ?></span>
+<span id="prestigeMultiplierStat" style="display:none;"><?php echo $current_prestige_multiplier; ?></span>
+<span id="prestigePointsStat" style="display:none;"><?php echo $current_prestige_points; ?></span>
+
+
 
 <!-- SCRIPTS -->
 <!-- <script src="logic/Cake.js"></script> -->
 <script type="module" src="logic/game.js"></script>
+
+<script type="module" src="logic/prestige.js"></script>
 
 
 </body>

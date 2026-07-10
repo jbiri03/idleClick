@@ -1,41 +1,76 @@
 import { game, upgrades, buyUpgrade } from "./game.js";
 
+/* -------------------------------------------------------
+   LOAD UPGRADE DATA (ONLY IF upgradeData EXISTS)
+---------------------------------------------------------*/
 const upgradeData = document.getElementById("upgradeData");
 
-game.multiplier = parseFloat(upgradeData.dataset.multiplier) || 1;
-game.clickPower = parseFloat(upgradeData.dataset.clickpower) || 1;
-game.cps = parseFloat(upgradeData.dataset.cps) || 0;
-game.bonus = parseFloat(upgradeData.dataset.bonus) || 0;
+if (upgradeData) {
+    game.multiplier = parseFloat(upgradeData.dataset.multiplier) || 1;
+    game.clickPower = parseFloat(upgradeData.dataset.clickpower) || 1;
+    game.cps = parseFloat(upgradeData.dataset.cps) || 0;
+    game.bonus = parseFloat(upgradeData.dataset.bonus) || 0;
+}
 
-console.log("Loaded upgrade stats:", game);
+/* -------------------------------------------------------
+   LOAD PRESTIGE MULTIPLIER (SAFE)
+---------------------------------------------------------*/
+const prestigeElement = document.getElementById("prestigeMultiplierStat");
+game.prestigeMultiplier = prestigeElement
+    ? parseFloat(prestigeElement.textContent) || 1
+    : 1;
 
-// LOAD SAVED CAKES
-game.sugar = parseInt(document.getElementById("clickCount1").textContent) || 0;
-game.currency = parseFloat(document.getElementById("cash").textContent) || 0;
+console.log("Loaded game stats:", game);
 
+/* -------------------------------------------------------
+   LOAD SAVED CAKES + CURRENCY (ONLY IF ELEMENTS EXIST)
+---------------------------------------------------------*/
 const clickCountElement = document.getElementById("clickCount1");
 const clickCountElement2 = document.getElementById("clickCount2");
+const cashElement = document.getElementById("cash");
+
+if (clickCountElement) {
+    game.sugar = parseInt(clickCountElement.textContent) || 0;
+}
+
+if (cashElement) {
+    game.currency = parseFloat(cashElement.textContent) || 0;
+}
+
+/* -------------------------------------------------------
+   CLICK BUTTON (ONLY IF CLICKER EXISTS)
+---------------------------------------------------------*/
 const clickerButton = document.getElementById("clicker");
+
+if (clickerButton) {
+    clickerButton.addEventListener("click", () => {
+
+        // Apply prestige multiplier to clicking
+        game.sugar += game.clickPower * game.multiplier * game.prestigeMultiplier;
+
+        if (clickCountElement) clickCountElement.textContent = game.sugar.toFixed(1);
+        if (clickCountElement2) clickCountElement2.textContent = game.sugar.toFixed(1);
+
+        saveToServer();
+    });
+}
+
+/* -------------------------------------------------------
+   SAVE BUTTON (ONLY IF EXISTS)
+---------------------------------------------------------*/
 const saveButton = document.getElementById("saveButton");
 
-// CLICK EVENT
-clickerButton.addEventListener("click", () => {
+if (saveButton) {
+    saveButton.addEventListener("click", () => {
+        saveToServer();
+    });
+}
 
-    game.sugar += game.clickPower * game.multiplier;
-
-    clickCountElement.textContent = game.sugar;
-    clickCountElement2.textContent = game.sugar;
-
-    saveToServer(); 
-});
-
-// SAVE BUTTON
-saveButton.addEventListener("click", () => {
-    saveToServer(); 
-});
-
-// SAVE FUNCTION
+/* -------------------------------------------------------
+   SAVE FUNCTION
+---------------------------------------------------------*/
 function saveToServer() {
+
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "php/save_game.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -56,6 +91,7 @@ function saveToServer() {
         "&multiplier=" + encodeURIComponent(game.multiplier) +
         "&clickPower=" + encodeURIComponent(game.clickPower) +
         "&cps=" + encodeURIComponent(game.cps) +
-        "&bonus=" + encodeURIComponent(game.bonus)
+        "&bonus=" + encodeURIComponent(game.bonus) +
+        "&prestige_multiplier=" + encodeURIComponent(game.prestigeMultiplier)
     );
 }

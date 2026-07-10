@@ -20,7 +20,10 @@ export const game = {
     multiplier: 1,
     cps: 0,
     currency: 0,
-    bonus: 0
+    bonus: 0,
+
+    // ⭐ NEW — permanent prestige multiplier
+    prestigeMultiplier: 1
 };
 
 /* -------------------------------------------------------
@@ -58,25 +61,21 @@ export function buyUpgrade(upgrade) {
 
     if (game.currency >= upgrade.cost) {
 
-        // APPLY UPGRADE
         game.currency -= upgrade.cost;
         upgrade.applyUpgrade(game);
         upgrade.purchased = true;
 
         saveUpgradeToServer(upgrade.name);
 
-        // AUTO-BAKE INDICATOR (SHOW WHEN CPS > 0)
         if (game.cps > 0) {
             const indicator = document.getElementById("autoBakeIndicator");
             if (indicator) indicator.style.display = "block";
         }
 
-        // UPDATE MONEY UI
         const moneyElement = document.getElementById("money");
         if (moneyElement) {
             moneyElement.textContent = game.currency;
 
-            // SAVE GAME STATE
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "php/save_game.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -87,7 +86,8 @@ export function buyUpgrade(upgrade) {
                 "&multiplier=" + encodeURIComponent(game.multiplier) +
                 "&clickPower=" + encodeURIComponent(game.clickPower) +
                 "&cps=" + encodeURIComponent(game.cps) +
-                "&bonus=" + encodeURIComponent(game.bonus)
+                "&bonus=" + encodeURIComponent(game.bonus) +
+                "&prestige_multiplier=" + encodeURIComponent(game.prestigeMultiplier)
             );
 
             return true;
@@ -119,14 +119,12 @@ if (isClickerPage) {
 
         const indicator = document.getElementById("autoBakeIndicator");
 
-        // AUTO-BAKING ACTIVE
         if (game.cps > 0) {
 
-            // SHOW INDICATOR
             if (indicator) indicator.style.display = "block";
 
-            // ADD SUGAR
-            sugarBuffer += game.cps / 10;
+            // ⭐ APPLY PRESTIGE MULTIPLIER TO AUTO-BAKE
+            sugarBuffer += (game.cps * game.prestigeMultiplier) / 10;
 
             if (sugarBuffer >= 1) {
                 const whole = Math.floor(sugarBuffer);
@@ -136,7 +134,6 @@ if (isClickerPage) {
             }
 
         } else {
-            // AUTO-BAKING OFF → HIDE INDICATOR
             if (indicator) indicator.style.display = "none";
         }
 
@@ -151,13 +148,15 @@ if (isClickerPage) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "php/save_game.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
         xhr.send(
             "currency=" + encodeURIComponent(game.currency) +
             "&clicks=" + encodeURIComponent(Math.floor(game.sugar)) +
             "&multiplier=" + encodeURIComponent(game.multiplier) +
             "&clickPower=" + encodeURIComponent(game.clickPower) +
             "&cps=" + encodeURIComponent(game.cps) +
-            "&bonus=" + encodeURIComponent(game.bonus)
+            "&bonus=" + encodeURIComponent(game.bonus) +
+            "&prestige_multiplier=" + encodeURIComponent(game.prestigeMultiplier)
         );
     }, 1000);
 }
