@@ -104,7 +104,7 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
             <li><a href="index.php"><button>Home</button></a></li>
             <li><a href="sell_cakes.php"><button>Sell</button></a></li>
             <li><a href="upgrades.php"><button>Upgrades</button></a></li>
-            <li><a href="prestige.html"><button>Prestige</button></a></li>
+            <li><a href="prestige.php"><button>Prestige</button></a></li>
             <li><a href="settings.php"><button id="settingsButton">Settings</button></a></li>
         </ul>
     </div>
@@ -157,7 +157,6 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
             <li>Click Power: <?php echo $current_clickPower ?></li>
             <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
             <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
-            <!-- <li>Cake Type: <span id="cakeDetails"></span></li> -->
         </ul>
 
         <h2>PROGRESS</h2>

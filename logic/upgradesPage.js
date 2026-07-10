@@ -86,7 +86,7 @@ if (window.__upgradesPageLoaded) {
 
         const productionList = document.querySelector("#stats ul:nth-of-type(2)");
 
-        productionList.children[0].textContent = `Auto-Bake Rate: ${game.cps}`;
+        productionList.children[0].textContent = `Auto-Bake Rate: ${game.cps.toFixed(1)}`;
         productionList.children[1].textContent = `Click Power: ${game.clickPower}`;
         productionList.children[2].textContent = `Multiplier Bonus: ${game.multiplier}`;
         productionList.children[3].textContent = `Total Cakes Per Click: ${game.clickPower * game.multiplier}`;
