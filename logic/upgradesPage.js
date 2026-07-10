@@ -1,12 +1,11 @@
 import { game, upgrades, buyUpgrade } from "./game.js";
 
-//STOP DOUBLE INITIALIZATION
 if (window.__upgradesPageLoaded) {
     console.log("Upgrades page already initialized — skipping re‑init.");
 } else {
     window.__upgradesPageLoaded = true;
 
-    //BUTTON ELEMENTS
+    // BUTTON ELEMENTS
     const upgradeClick1 = document.getElementById("upgradeClick1");
     const upgradeClick2 = document.getElementById("upgradeClick2");
     const upgradeClick3 = document.getElementById("upgradeClick3");
@@ -19,19 +18,19 @@ if (window.__upgradesPageLoaded) {
     const autoBake2 = document.getElementById("autoBake2");
     const autoBake3 = document.getElementById("autoBake3");
 
-    //LOAD GAME STATE
-    game.sugar = parseInt(document.getElementById("cakeStat").textContent) || 0;
-    game.currency = parseInt(document.getElementById("money").textContent) || 0;
+    // LOAD GAME STATE FROM HIDDEN SPANS
+    game.sugar = parseInt(document.getElementById("cakeStat")?.textContent) || 0;
+    game.currency = parseInt(document.getElementById("money")?.textContent) || 0;
 
-    game.multiplier = parseInt(document.getElementById("multiplierStat").textContent) || 1;
-    game.clickPower = parseInt(document.getElementById("clickPowerStat").textContent) || 1;
-    game.cps = parseInt(document.getElementById("cpsStat").textContent) || 0;
-    game.bonus = parseInt(document.getElementById("bonusStat").textContent) || 0;
+    game.multiplier = parseInt(document.getElementById("multiplierStat")?.textContent) || 1;
+    game.clickPower = parseInt(document.getElementById("clickPowerStat")?.textContent) || 1;
+    game.cps = parseInt(document.getElementById("cpsStat")?.textContent) || 0;
+    game.bonus = parseInt(document.getElementById("bonusStat")?.textContent) || 0;
 
     console.log("Upgrades page initialized.");
     console.log("Loaded game state:", game);
 
-    //UPGRADE MAP
+    // UPGRADE MAP
     const upgradeMap = [
         { btn: upgradeClick1, idx: 0 },
         { btn: upgradeClick2, idx: 1 },
@@ -46,7 +45,25 @@ if (window.__upgradesPageLoaded) {
         { btn: autoBake3, idx: 8 }
     ];
 
-    //EVENT LISTENERS
+    // COLLECT RESET AND UNLOCK BUTTONS
+    function unlockAfterPrestige() {
+        const prestigeReset =
+            game.clickPower === 1 &&
+            game.multiplier === 1 &&
+            game.cps === 0;
+
+        if (prestigeReset) {
+            upgradeMap.forEach(({ btn }) => {
+                if (!btn) return;
+                btn.disabled = false;
+                btn.textContent = "Buy Upgrade";
+            });
+        }
+    }
+
+    unlockAfterPrestige();
+
+    // EVENT LISTENERS
     upgradeMap.forEach(({ btn, idx }) => {
         if (!btn) return;
 
@@ -59,7 +76,7 @@ if (window.__upgradesPageLoaded) {
         });
     });
 
-    //UI UPDATE
+    // UI UPDATE
     function updateStatsUI() {
         document.getElementById("clickPowerStat").textContent = game.clickPower;
         document.getElementById("multiplierStat").textContent = game.multiplier;
@@ -72,8 +89,7 @@ if (window.__upgradesPageLoaded) {
         productionList.children[3].textContent = `Total Cakes Per Click: ${game.clickPower * game.multiplier}`;
     }
 
-
-    //SEARCH BAR
+    // SEARCH BAR
     const searchInput = document.getElementById("upgradeSearch");
 
     if (searchInput) {
@@ -86,11 +102,7 @@ if (window.__upgradesPageLoaded) {
                 const text = btn.textContent.toLowerCase();
                 const row = btn.closest("tr");
 
-                if (text.includes(query)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
+                row.style.display = text.includes(query) ? "" : "none";
             });
         });
     }
