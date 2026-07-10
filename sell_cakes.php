@@ -113,7 +113,6 @@ if (isset($_SESSION['user_id'])) {
                         <li>Current Prestige Level: {} </li>
                     </ul>
 
-                <button>SHARE</button>
                 <div id="upgradeData" style="display:none;"
                     data-multiplier="<?php echo $current_multiplier; ?>"
                     data-clickpower="<?php echo $current_clickPower; ?>"

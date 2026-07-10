@@ -36,7 +36,7 @@ export const upgrades = [
     new SugarMultiplier("More Sugar III", 300000, 2),
 
     new AutoBaker("Basic Auto Baker I", 5000, 1),
-    new AutoBaker("Basic Auto Baker II", 50000, 10),
+    new AutoBaker("Basic Auto Baker II", 50000, 9),
     new AutoBaker("Basic Auto Baker III", 500000, 25)
 ];
 

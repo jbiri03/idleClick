@@ -158,8 +158,6 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
             <li>Prestige Multiplier: {}</li>
             <li>Current Prestige Level: {} </li>
         </ul>
-
-        <button>SHARE</button>
     </div>
 </div>
 

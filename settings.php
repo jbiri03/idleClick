@@ -174,8 +174,6 @@ $current_currency = 0;
                         <li>Prestige Multiplier: {}</li>
                         <li>Current Prestige Level: {} </li>
                     </ul>
-
-                <button>SHARE</button>
             </div>
         </div>
     <!-- HIDDEN GAME STATE FOR JS -->

@@ -194,7 +194,7 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
                             <?php echo $Baker2Purchased ? "Purchased" : "Basic Auto Baker II"; ?>
                         </button>
                     </td>
-                    <td>Autoclicker: +10 Cakes/sec</td>
+                    <td>Autoclicker: +9 Cakes/sec</td>
                     <td>$50000</td>
                 </tr>
                 <tr>
@@ -204,7 +204,7 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
                         </button>
                     </td>
                     <td>Autoclicker: +25 Cakes/sec</td>
-                    <td>$50000</td>
+                    <td>$500000</td>
                 </tr>            
             </table>
         </div>
@@ -237,7 +237,6 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
             <li>Current Prestige Level: {} </li>
         </ul>
 
-        <button>SHARE</button>
     </div>
 </div>
 

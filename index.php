@@ -151,10 +151,6 @@
                     data-cps="<?php echo $current_cps; ?>"
                     data-bonus="<?php echo $current_bonus; ?>">
             </div>
-
-
-                <button>SHARE</button>
-            </div>
         </div>
 
         <!-- SCRIPTS -->
