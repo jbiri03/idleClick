@@ -1,4 +1,5 @@
 <?php
+session_start();
 $errMsg = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

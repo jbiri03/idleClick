@@ -100,6 +100,7 @@ if (isset($_SESSION['user_id'])) {
 
                 <h2>PRODUCTION</h2>
                     <ul>
+                        <li>Auto-Bake Rate: <?php echo $current_cps?></li>
                         <li>Click Power: <?php echo $current_clickPower ?></li>
                         <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
                         <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
@@ -123,15 +124,16 @@ if (isset($_SESSION['user_id'])) {
 
             </div>
         </div>
+        <!-- HIDDEN GAME STATE FOR JS -->
+    <span id="multiplierStat" style="display:none;"><?php echo $current_multiplier; ?></span>
+    <span id="clickPowerStat" style="display:none;"><?php echo $current_clickPower; ?></span>
+    <span id="cpsStat" style="display:none;"><?php echo $current_cps; ?></span>
+    <span id="bonusStat" style="display:none;"><?php echo $current_bonus; ?></span>
 
         <!-- SCRIPTS -->
-        <!-- CAKE DETAILS -->
-        <!-- <script src="logic/Cake.js"></script> -->
 
         <!-- SELL SCRIPT -->
         <script src="logic/sell.js"></script>
         
-        <!-- GAME LOGIC -->
-        <!-- <script type="module" src="logic/game.js"></script> -->
     </body>
 </html>
