@@ -1,8 +1,7 @@
 import { game, upgrades, buyUpgrade } from "./game.js";
 
-/* -------------------------------------------------------
-   LOAD UPGRADE DATA (ONLY IF upgradeData EXISTS)
----------------------------------------------------------*/
+
+//LOAD UPGRADE DATA
 const upgradeData = document.getElementById("upgradeData");
 
 if (upgradeData) {
@@ -12,9 +11,8 @@ if (upgradeData) {
     game.bonus = parseFloat(upgradeData.dataset.bonus) || 0;
 }
 
-/* -------------------------------------------------------
-   LOAD PRESTIGE MULTIPLIER (SAFE)
----------------------------------------------------------*/
+
+//LOAD PRESTIGE ELEMENTS
 const prestigeElement = document.getElementById("prestigeMultiplierStat");
 game.prestigeMultiplier = prestigeElement
     ? parseFloat(prestigeElement.textContent) || 1
@@ -22,9 +20,7 @@ game.prestigeMultiplier = prestigeElement
 
 console.log("Loaded game stats:", game);
 
-/* -------------------------------------------------------
-   LOAD SAVED CAKES + CURRENCY (ONLY IF ELEMENTS EXIST)
----------------------------------------------------------*/
+//LOAD SAVED CAKES
 const clickCountElement = document.getElementById("clickCount1");
 const clickCountElement2 = document.getElementById("clickCount2");
 const cashElement = document.getElementById("cash");
@@ -37,9 +33,8 @@ if (cashElement) {
     game.currency = parseFloat(cashElement.textContent) || 0;
 }
 
-/* -------------------------------------------------------
-   CLICK BUTTON (ONLY IF CLICKER EXISTS)
----------------------------------------------------------*/
+
+//CLICK BUTTON
 const clickerButton = document.getElementById("clicker");
 
 if (clickerButton) {
@@ -55,9 +50,8 @@ if (clickerButton) {
     });
 }
 
-/* -------------------------------------------------------
-   SAVE BUTTON (ONLY IF EXISTS)
----------------------------------------------------------*/
+
+//SAVE BUTTON
 const saveButton = document.getElementById("saveButton");
 
 if (saveButton) {
@@ -66,9 +60,8 @@ if (saveButton) {
     });
 }
 
-/* -------------------------------------------------------
-   SAVE FUNCTION
----------------------------------------------------------*/
+
+//SAVE FUNCTION
 function saveToServer() {
 
     const xhr = new XMLHttpRequest();

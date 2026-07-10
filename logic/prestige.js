@@ -5,15 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const prestigePointsEl = document.getElementById("prestigePoints");
     const newPrestigeMultiplierEl = document.getElementById("newPrestigeMultiplier");
 
-    // Load current values from PHP (hidden spans)
+    //LOAD VALUES
     const currentCakes = parseInt(document.getElementById("cakeStat").textContent) || 0;
     const currentPrestigePoints = parseInt(document.getElementById("prestigePointsStat")?.textContent) || 0;
     const currentPrestigeMultiplier = parseFloat(document.getElementById("prestigeMultiplierStat")?.textContent) || 1;
 
-    // Display current cakes
+    //DISPLAY
     totalCakesEl.textContent = currentCakes;
 
-    // ⭐ Prestige requirement: 10,000 cakes per point
+   //1000 CAKES PER POINT
     const earnedPrestige = Math.floor(currentCakes / 1000);
 
     // Total prestige points after prestige
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     prestigePointsEl.textContent = newPrestigePoints;
     newPrestigeMultiplierEl.textContent = "x" + newPrestigeMultiplier.toFixed(1);
 
-    // ⭐ Disable prestige button if requirement not met
+    //DISABLE BUTTON
     if (currentCakes < 1000) {
         prestigeButton.disabled = true;
         prestigeButton.textContent = "Need 1000 Cakes to Prestige";
@@ -51,11 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (data.success) {
 
-                    // Smooth inline confirmation
                     prestigeButton.textContent = "Prestige Complete!";
                     prestigeButton.style.backgroundColor = "#4CAF50";
 
-                    // Small delay for visual feedback
                     setTimeout(() => {
                         window.location.href = "index.php";
                     }, 900);

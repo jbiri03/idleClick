@@ -1,17 +1,15 @@
 import { SugarMultiplier, ClickBooster, AutoBaker } from "./Upgrades.js";
 
-/* -------------------------------------------------------
-   PAGE CHECK
----------------------------------------------------------*/
+
+//PAGE CHECK
 const isClickerPage = !!document.getElementById("clicker");
 
 if (!isClickerPage) {
     console.log("Not on clicker page — skipping game initialization.");
 }
 
-/* -------------------------------------------------------
-   GAME STATE
----------------------------------------------------------*/
+
+//GAME STATE
 let sugarBuffer = 0;
 
 export const game = {
@@ -26,9 +24,8 @@ export const game = {
     prestigeMultiplier: 1
 };
 
-/* -------------------------------------------------------
-   UPGRADE ARRAY
----------------------------------------------------------*/
+
+//UPGRADE ARRAY
 export const upgrades = [
     new ClickBooster("Stronger Clicks I", 1000, 4),
     new ClickBooster("Stronger Clicks II", 10000, 5),
@@ -43,9 +40,8 @@ export const upgrades = [
     new AutoBaker("Basic Auto Baker III", 500000, 25)
 ];
 
-/* -------------------------------------------------------
-   SAVE UPGRADE TO SERVER
----------------------------------------------------------*/
+
+//SAVE UPGRADES
 function saveUpgradeToServer(upgradeName) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "php/save_upgrade.php", true);
@@ -53,9 +49,7 @@ function saveUpgradeToServer(upgradeName) {
     xhr.send("upgrade_name=" + encodeURIComponent(upgradeName));
 }
 
-/* -------------------------------------------------------
-   BUY UPGRADE
----------------------------------------------------------*/
+//BUY UPGRADES
 export function buyUpgrade(upgrade) {
     console.log("Attempting to buy:", upgrade.name);
 
@@ -98,9 +92,7 @@ export function buyUpgrade(upgrade) {
     return false;
 }
 
-/* -------------------------------------------------------
-   UI UPDATE
----------------------------------------------------------*/
+//UPDATE UI
 function updateCakeUI() {
     const elements = document.querySelectorAll("[data-cake]");
     elements.forEach(el => {
@@ -111,9 +103,8 @@ function updateCakeUI() {
     if (cakeStat) cakeStat.textContent = Math.floor(game.sugar);
 }
 
-/* -------------------------------------------------------
-   AUTO-CLICKER LOOP (ONLY ON CLICKER PAGE)
----------------------------------------------------------*/
+
+//AUTO CLICKER
 if (isClickerPage) {
     setInterval(() => {
 

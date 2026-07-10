@@ -32,14 +32,6 @@ try {
     $prestigeMultiplier  = (float)$data['prestige_multiplier'];
     $prestigeLevel       = (int)$data['prestige_level'];
 
-    /* -------------------------------------------------------
-       ⭐ NEW PRESTIGE RULES (YOUR REQUEST)
-       -------------------------------------------------------
-       1 prestige level gained per prestige
-       prestige points gained = cakes / 1000
-       prestige multiplier = 1.0 + (0.1 × prestige points)
-    ---------------------------------------------------------*/
-
     // Prestige points earned from cakes
     $earnedPoints = floor($currentCakes / 1000);
 
