@@ -1,50 +1,79 @@
 <?php
 session_start();
+
 require_once __DIR__ . '/php/config.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$userId = (int)$_SESSION['user_id'];
+
+// DEFAULT GAME STATE
 $current_cakes = 0;
 $current_currency = 0;
 $current_multiplier = 1;
 $current_clickPower = 1;
 $current_cps = 0;
 $current_bonus = 0;
+$current_prestige_multiplier = 1;
+$current_prestige_points = 0;
+$current_prestige_level = 0;
 
-if (isset($_SESSION['user_id'])) {
-    try {
-        $dsn = "sqlite:$db";
-        $pdo = new \PDO($dsn);
+$purchased_upgrades = [];
 
-        $stmt = $pdo->prepare("
-            SELECT cakes, currency, multiplier, clickPower, cps, bonus
-            FROM player_save
-            WHERE id = :user_id
-        ");
+try {
+    $dsn = "sqlite:$db";
+    $pdo = new PDO($dsn);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt->execute([':user_id' => $_SESSION['user_id']]);
-        $player_data = $stmt->fetch(\PDO::FETCH_ASSOC);
+    // LOAD PLAYER SAVE
+    $stmt = $pdo->prepare("
+        SELECT 
+            cakes,
+            currency,
+            multiplier,
+            clickPower,
+            cps,
+            bonus,
+            prestige_multiplier,
+            prestige_points,
+            prestige_level
+        FROM player_save
+        WHERE id = :user_id
+        LIMIT 1
+    ");
+    $stmt->execute([':user_id' => $userId]);
+    $player_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($player_data) {
-            $current_cakes = (int)$player_data['cakes'];
-            $current_currency = (int)$player_data['currency'];
-            $current_multiplier = (float)$player_data['multiplier'];
-            $current_clickPower = (int)$player_data['clickPower'];
-            $current_cps = (int)$player_data['cps'];
-            $current_bonus = (int)$player_data['bonus'];
-        }
-        else {
-                $current_cakes = 0;
-                $current_currency = 0;
-                $current_multiplier = 1;
-                $current_clickPower = 1;
-                $current_cps = 0;
-                $current_bonus = 0;
-        }
-
-    } catch (\PDOException $e) {
-        echo "Database connection failed: " . $e->getMessage();
+    if ($player_data) {
+        $current_cakes = (int)($player_data['cakes'] ?? 0);
+        $current_currency = (int)($player_data['currency'] ?? 0);
+        $current_multiplier = (int)($player_data['multiplier'] ?? 1);
+        $current_clickPower = (int)($player_data['clickPower'] ?? 1);
+        $current_cps = (int)($player_data['cps'] ?? 0);
+        $current_bonus = (int)($player_data['bonus'] ?? 0);
+        $current_prestige_multiplier = (float)($player_data['prestige_multiplier'] ?? 1);
+        $current_prestige_points = (int)($player_data['prestige_points'] ?? 0);
+        $current_prestige_level = (int)($player_data['prestige_level'] ?? 0);
     }
-} else {
-    header("Location: index.php");
+
+    // LOAD PURCHASED UPGRADES
+    $stmt2 = $pdo->prepare("
+        SELECT upgrade_name, purchased
+        FROM player_upgrades
+        WHERE user_id = :user_id
+    ");
+    $stmt2->execute([':user_id' => $userId]);
+
+    while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+        $upgradeName = $row['upgrade_name'] ?? '';
+        $purchased_upgrades[$upgradeName] = (int)($row['purchased'] ?? 0);
+    }
+
+} catch (PDOException $e) {
+    die("Database connection failed: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
 }
 ?>
 
@@ -67,14 +96,10 @@ if (isset($_SESSION['user_id'])) {
                     <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
                     <li><a href="prestige.php"><button id = "prestigeButton">Prestige</button></a></li>
                     <li><a href="settings.php"><button id = "settingsButton">Settings</button></a></li>
-                    <!-- <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
-                    <li><a href="inventory.html"><button id = "inventoryButton">Inventory</button></a> </li> -->
                 </ul>
             </div>
         </div>
 
-        <!-- ADDITIONAL FEATURES TO BE ADDED-->
-        <!-- <a href="shop.html"><button>Shop</button></a> -->
 
         <div class="column2">
 
@@ -103,14 +128,14 @@ if (isset($_SESSION['user_id'])) {
                         <li>Auto-Bake Rate: <?php echo $current_cps?></li>
                         <li>Click Power: <?php echo $current_clickPower ?></li>
                         <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
-                        <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
+                        <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier * $current_prestige_multiplier?></li>
                         <!-- <li>Cake Type: <span id="cakeDetails"></span></li> -->
                     </ul>
 
                 <h2>PROGRESS</h2>
                     <ul>
-                        <li>Prestige Multiplier: {}</li>
-                        <li>Current Prestige Level: {} </li>
+                        <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier; ?></li>
+                        <li>Current Prestige Level: <?php echo $current_prestige_level; ?></li>
                     </ul>
 
                 <div id="upgradeData" style="display:none;"

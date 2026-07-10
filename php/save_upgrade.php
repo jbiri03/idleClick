@@ -2,15 +2,30 @@
 session_start();
 require_once __DIR__ . '/config.php';
 
+header('Content-Type: application/json; charset=utf-8');
+
 if (!isset($_SESSION['user_id'])) {
-    exit("Not logged in");
+    echo json_encode([
+        'success' => false,
+        'error' => 'Not logged in'
+    ]);
+    exit();
 }
 
-$user_id = $_SESSION['user_id'];
-$upgrade_name = $_POST['upgrade_name'] ?? '';
+$user_id = (int)$_SESSION['user_id'];
+$upgrade_name = trim($_POST['upgrade_name'] ?? '');
+
+if ($upgrade_name === '') {
+    echo json_encode([
+        'success' => false,
+        'error' => 'Missing upgrade name'
+    ]);
+    exit();
+}
 
 try {
     $pdo = new PDO("sqlite:$db");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $pdo->prepare("
         INSERT INTO player_upgrades (user_id, upgrade_name, purchased)
@@ -24,9 +39,15 @@ try {
         ':upgrade_name' => $upgrade_name
     ]);
 
-    echo "Upgrade saved";
+    echo json_encode([
+        'success' => true,
+        'message' => 'Upgrade saved'
+    ]);
 
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo json_encode([
+        'success' => false,
+        'error' => $e->getMessage()
+    ]);
 }
 ?>

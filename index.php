@@ -149,7 +149,7 @@
                         <li>Auto-Bake Rate: <?php echo isset($current_cps) ? $current_cps : 0; ?></li>
                         <li>Click Power: <?php echo isset($current_clickPower) ? $current_clickPower : 0;?></li>
                         <li>Multiplier Bonus: <?php echo isset($current_multiplier) ? $current_multiplier : 0; ?></li>
-                        <li>Total Cakes Per Click: <?php echo isset($current_clickPower) ? $current_clickPower * $current_multiplier : 0;?></li>
+                        <li>Total Cakes Per Click: <?php echo isset($current_clickPower) ? $current_clickPower * $current_multiplier * $current_prestige_multiplier : 0;?></li>
                         <!-- <li>Cake Type: <span id="cakeDetails"></span></li> -->
                     </ul>
 

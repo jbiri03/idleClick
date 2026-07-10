@@ -156,7 +156,7 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
             <li>Auto-Bake Rate: <?php echo $current_cps?></li>
             <li>Click Power: <?php echo $current_clickPower ?></li>
             <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
-            <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
+            <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier * $current_prestige_multiplier?></li>
         </ul>
 
         <h2>PROGRESS</h2>

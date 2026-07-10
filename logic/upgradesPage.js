@@ -1,112 +1,157 @@
 import { game, upgrades, buyUpgrade } from "./game.js";
 
-if (window.__upgradesPageLoaded) {
-    console.log("Upgrades page already initialized — skipping re‑init.");
-} else {
+if (!window.__upgradesPageLoaded) {
     window.__upgradesPageLoaded = true;
 
-    // BUTTON ELEMENTS
-    const upgradeClick1 = document.getElementById("upgradeClick1");
-    const upgradeClick2 = document.getElementById("upgradeClick2");
-    const upgradeClick3 = document.getElementById("upgradeClick3");
+    const byId = (id) => document.getElementById(id);
 
-    const sugarMult1 = document.getElementById("sugarMult1");
-    const sugarMult2 = document.getElementById("sugarMult2");
-    const sugarMult3 = document.getElementById("sugarMult3");
+    const elements = {
+        cakeStat: byId("cakeStat"),
+        money: byId("money"),
 
-    const autoBake1 = document.getElementById("autoBake1");
-    const autoBake2 = document.getElementById("autoBake2");
-    const autoBake3 = document.getElementById("autoBake3");
+        multiplierStat: byId("multiplierStat"),
+        clickPowerStat: byId("clickPowerStat"),
+        cpsStat: byId("cpsStat"),
+        bonusStat: byId("bonusStat"),
+        prestigeMultiplierStat: byId("prestigeMultiplierStat"),
+        prestigePointsStat: byId("prestigePointsStat"),
 
-    // LOAD GAME STATE FROM HIDDEN SPANS
-    game.sugar = parseInt(document.getElementById("cakeStat")?.textContent) || 0;
-    game.currency = parseInt(document.getElementById("money")?.textContent) || 0;
+        autoBakeRateText: byId("autoBakeRateText"),
+        clickPowerText: byId("clickPowerText"),
+        multiplierText: byId("multiplierText"),
+        totalClickText: byId("totalClickText"),
+        prestigeMultiplierText: byId("prestigeMultiplierText"),
+        prestigePointsText: byId("prestigePointsText"),
 
-    game.multiplier = parseInt(document.getElementById("multiplierStat")?.textContent) || 1;
-    game.clickPower = parseInt(document.getElementById("clickPowerStat")?.textContent) || 1;
-    game.cps = parseInt(document.getElementById("cpsStat")?.textContent) || 0;
-    game.bonus = parseInt(document.getElementById("bonusStat")?.textContent) || 0;
+        upgradeSearch: byId("upgradeSearch"),
 
-    game.prestigeMultiplier = parseFloat(document.getElementById("prestigeMultiplierStat")?.textContent) || 1;
+        upgradeClick1: byId("upgradeClick1"),
+        upgradeClick2: byId("upgradeClick2"),
+        upgradeClick3: byId("upgradeClick3"),
+        sugarMult1: byId("sugarMult1"),
+        sugarMult2: byId("sugarMult2"),
+        sugarMult3: byId("sugarMult3"),
+        autoBake1: byId("autoBake1"),
+        autoBake2: byId("autoBake2"),
+        autoBake3: byId("autoBake3")
+    };
 
+    // LOAD STATE FROM PAGE
+    game.sugar = parseFloat(elements.cakeStat?.textContent) || 0;
+    game.currency = parseFloat(elements.money?.textContent) || 0;
+    game.multiplier = parseFloat(elements.multiplierStat?.textContent) || 1;
+    game.clickPower = parseFloat(elements.clickPowerStat?.textContent) || 1;
+    game.cps = parseFloat(elements.cpsStat?.textContent) || 0;
+    game.bonus = parseFloat(elements.bonusStat?.textContent) || 0;
+    game.prestigeMultiplier = parseFloat(elements.prestigeMultiplierStat?.textContent) || 1;
+    game.prestigePoints = parseFloat(elements.prestigePointsStat?.textContent) || 0;
 
     console.log("Upgrades page initialized.");
     console.log("Loaded game state:", game);
 
-    // UPGRADE MAP
     const upgradeMap = [
-        { btn: upgradeClick1, idx: 0 },
-        { btn: upgradeClick2, idx: 1 },
-        { btn: upgradeClick3, idx: 2 },
+        { btn: elements.upgradeClick1, idx: 0, name: "Stronger Clicks I" },
+        { btn: elements.upgradeClick2, idx: 1, name: "Stronger Clicks II" },
+        { btn: elements.upgradeClick3, idx: 2, name: "Stronger Clicks III" },
 
-        { btn: sugarMult1, idx: 3 },
-        { btn: sugarMult2, idx: 4 },
-        { btn: sugarMult3, idx: 5 },
+        { btn: elements.sugarMult1, idx: 3, name: "More Sugar I" },
+        { btn: elements.sugarMult2, idx: 4, name: "More Sugar II" },
+        { btn: elements.sugarMult3, idx: 5, name: "More Sugar III" },
 
-        { btn: autoBake1, idx: 6 },
-        { btn: autoBake2, idx: 7 },
-        { btn: autoBake3, idx: 8 }
+        { btn: elements.autoBake1, idx: 6, name: "Basic Auto Baker I" },
+        { btn: elements.autoBake2, idx: 7, name: "Basic Auto Baker II" },
+        { btn: elements.autoBake3, idx: 8, name: "Basic Auto Baker III" }
     ];
 
-    // COLLECT RESET AND UNLOCK BUTTONS
-    function unlockAfterPrestige() {
-        const prestigeReset =
-            game.clickPower === 1 &&
-            game.multiplier === 1 &&
-            game.cps === 0;
+    function updateStatsUI() {
+        if (elements.money) {
+            elements.money.textContent = Math.floor(game.currency);
+        }
 
-        if (prestigeReset) {
-            upgradeMap.forEach(({ btn }) => {
-                if (!btn) return;
-                btn.disabled = false;
-                btn.textContent = "Buy Upgrade";
-            });
+        if (elements.cakeStat) {
+            elements.cakeStat.textContent = Math.floor(game.sugar);
+        }
+
+        if (elements.clickPowerStat) {
+            elements.clickPowerStat.textContent = game.clickPower;
+        }
+
+        if (elements.multiplierStat) {
+            elements.multiplierStat.textContent = game.multiplier;
+        }
+
+        if (elements.cpsStat) {
+            elements.cpsStat.textContent = game.cps;
+        }
+
+        if (elements.bonusStat) {
+            elements.bonusStat.textContent = game.bonus;
+        }
+
+        if (elements.prestigeMultiplierStat) {
+            elements.prestigeMultiplierStat.textContent = game.prestigeMultiplier;
+        }
+
+        if (elements.prestigePointsStat) {
+            elements.prestigePointsStat.textContent = game.prestigePoints;
+        }
+
+        if (elements.autoBakeRateText) {
+            elements.autoBakeRateText.textContent = game.cps;
+        }
+
+        if (elements.clickPowerText) {
+            elements.clickPowerText.textContent = game.clickPower;
+        }
+
+        if (elements.multiplierText) {
+            elements.multiplierText.textContent = game.multiplier;
+        }
+
+        if (elements.totalClickText) {
+            elements.totalClickText.textContent = game.clickPower * game.multiplier * game.prestigeMultiplier;
+        }
+
+        if (elements.prestigeMultiplierText) {
+            elements.prestigeMultiplierText.textContent = game.prestigeMultiplier;
+        }
+
+        if (elements.prestigePointsText) {
+            elements.prestigePointsText.textContent = game.prestigePoints;
         }
     }
 
-    unlockAfterPrestige();
-
-    // EVENT LISTENERS
     upgradeMap.forEach(({ btn, idx }) => {
         if (!btn) return;
 
         btn.addEventListener("click", () => {
-            if (buyUpgrade(upgrades[idx])) {
-                btn.disabled = true;
-                btn.textContent = "Purchased";
-                updateStatsUI();
-            }
+            if (btn.disabled) return;
+
+            const didBuy = buyUpgrade(upgrades[idx]);
+
+            if (!didBuy) return;
+
+            btn.disabled = true;
+            btn.textContent = "Purchased";
+            updateStatsUI();
         });
     });
 
-    // UI UPDATE
-    function updateStatsUI() {
-        document.getElementById("clickPowerStat").textContent = game.clickPower;
-        document.getElementById("multiplierStat").textContent = game.multiplier;
+    if (elements.upgradeSearch) {
+        elements.upgradeSearch.addEventListener("input", () => {
+            const query = elements.upgradeSearch.value.toLowerCase().trim();
 
-        const productionList = document.querySelector("#stats ul:nth-of-type(2)");
-
-        productionList.children[0].textContent = `Auto-Bake Rate: ${game.cps.toFixed(1)}`;
-        productionList.children[1].textContent = `Click Power: ${game.clickPower}`;
-        productionList.children[2].textContent = `Multiplier Bonus: ${game.multiplier}`;
-        productionList.children[3].textContent = `Total Cakes Per Click: ${game.clickPower * game.multiplier}`;
-    }
-
-    // SEARCH BAR
-    const searchInput = document.getElementById("upgradeSearch");
-
-    if (searchInput) {
-        searchInput.addEventListener("input", () => {
-            const query = searchInput.value.toLowerCase().trim();
-
-            upgradeMap.forEach(({ btn }) => {
+            upgradeMap.forEach(({ btn, name }) => {
                 if (!btn) return;
 
-                const text = btn.textContent.toLowerCase();
                 const row = btn.closest("tr");
+                if (!row) return;
 
-                row.style.display = text.includes(query) ? "" : "none";
+                const matches = name.toLowerCase().includes(query);
+                row.style.display = matches ? "" : "none";
             });
         });
     }
+
+    updateStatsUI();
 }

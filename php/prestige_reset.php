@@ -74,6 +74,12 @@ try {
         "newPrestigeLevel" => $newPrestigeLevel
     ]);
 
+    $stmt3 = $pdo->prepare("
+    DELETE FROM player_upgrades
+    WHERE user_id = :id
+    ");
+    $stmt3->execute([':id' => $user_id]);
+
 } catch (PDOException $e) {
     echo json_encode(["success" => false, "error" => $e->getMessage()]);
 }

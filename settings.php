@@ -17,6 +17,9 @@ $current_username = '';
 $current_email = '';
 $current_cakes = 0;
 $current_currency = 0;
+$current_prestige_multiplier = 1;
+$current_prestige_points = 0;
+$current_prestige_level = 0;
 
     require_once __DIR__ . '/php/config.php';
 
@@ -36,7 +39,7 @@ $current_currency = 0;
 
             // LOAD FULL GAME STATE
             $stmt = $pdo->prepare("
-                SELECT cakes, currency, multiplier, clickPower, cps, bonus
+                SELECT cakes, currency, multiplier, clickPower, cps, bonus, prestige_multiplier, prestige_points, prestige_level
                 FROM player_save
                 WHERE id = :user_id
             ");
@@ -51,6 +54,9 @@ $current_currency = 0;
                 $current_clickPower = (int)$player_data['clickPower'];
                 $current_cps = (int)$player_data['cps'];
                 $current_bonus = (int)$player_data['bonus'];
+                $current_prestige_multiplier = (float)($player_data['prestige_multiplier'] ?? 1);
+                $current_prestige_points = (int)($player_data['prestige_points'] ?? 0);
+                $current_prestige_level = (int)$player_data['prestige_level'];
             }
             else {
                 $current_cakes = 0;
@@ -106,8 +112,6 @@ $current_currency = 0;
             </div>
         </div>
 
-        <!-- ADDITIONAL FEATURES TO BE ADDED-->
-        <!-- <a href="shop.html"><button>Shop</button></a> -->
 
         <div class="column2">
              <div id="settingsSect">
@@ -165,13 +169,13 @@ $current_currency = 0;
                         <li>Auto-Bake Rate: <?php echo $current_cps?></li>
                         <li>Click Power: <?php echo $current_clickPower ?></li>
                         <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
-                        <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
+                        <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier * $current_prestige_multiplier?></li>
                     </ul>
 
                 <h2>PROGRESS</h2>
                     <ul>
-                        <li>Prestige Multiplier: {}</li>
-                        <li>Current Prestige Level: {} </li>
+                        <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier; ?></li>
+                        <li>Current Prestige Level: <?php echo $current_prestige_level; ?></li>
                     </ul>
             </div>
         </div>
