@@ -472,3 +472,15 @@ body {
     transform: translateY(1px);
     background: #ff9a5c;
 }
+
+/* DISABLED BUTTON STYLE */
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background-color: #f3e2d0 !important; /* soft muted cream */
+    color: #a38a6a !important;            /* muted brown text */
+    border-color: #d6c2a3 !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
