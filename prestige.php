@@ -8,6 +8,7 @@ $current_multiplier = 1;
 $current_clickPower = 1;
 $current_cps = 0;
 $current_bonus = 0;
+$available_prestige_points = 0;
 
 require_once __DIR__ . '/php/config.php';
 
@@ -37,6 +38,8 @@ if(isset($_SESSION['user_id'])) {
             $current_prestige_multiplier = (float)$player_data['prestige_multiplier'];
             $current_prestige_level = (int)$player_data['prestige_level'];
             $current_prestige_points = (int)$player_data['prestige_points'];
+
+            $available_prestige_points = floor($current_cakes / 1000);
         }
 
         else {
@@ -119,9 +122,14 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
             Total Cakes Baked: <strong id="totalCakesBaked">0</strong>
         </p>
 
-        <p class="prestige-info">
-            Prestige Points Available: <strong id="prestigePoints"><?php echo $current_cakes/1000?></strong>
+        <p class = "prestige-info">
+            Prestige Points Available: <strong><?php echo $available_prestige_points?></strong>
         </p>
+
+        <p class="prestige-info" style = "display:none">
+            Prestige Points Total: <strong id="prestigePoints"></strong>
+        </p>
+        
 
         <p class="prestige-info">
             New Prestige Multiplier: <strong id="newPrestigeMultiplier">x1</strong>
@@ -133,8 +141,8 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
 
         <p class="prestige-warning">
             Prestiging will reset your cakes, cash, upgrades, and production.<br>
-            Your prestige multiplier is permanent.
-        </p>
+            Your prestige multiplier is permanent. <br>
+            You earn 1 prestige point for every 1000 cakes. 
 
     </div>
 
