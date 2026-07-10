@@ -166,7 +166,6 @@ $current_currency = 0;
                         <li>Click Power: <?php echo $current_clickPower ?></li>
                         <li>Multiplier Bonus: <?php echo $current_multiplier?></li>
                         <li>Total Cakes Per Click: <?php echo $current_clickPower * $current_multiplier?></li>
-                        <!-- <li>Cake Type: <span id="cakeDetails"></span></li> -->
                     </ul>
 
                 <h2>PROGRESS</h2>

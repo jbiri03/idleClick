@@ -179,7 +179,6 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
 
 <!-- SCRIPTS -->
 <!-- <script src="logic/Cake.js"></script> -->
-<script type="module" src="logic/game.js"></script>
 
 <script type="module" src="logic/prestige.js"></script>
 
