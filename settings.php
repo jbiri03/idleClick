@@ -44,7 +44,7 @@ try {
             $deleteConfirm = trim($_POST['deleteConfirm'] ?? '');
 
             if ($deleteConfirm !== 'DELETE') {
-                $errMsg = "You must type DELETE exactly to confirm account deletion.";
+                $accountErr = "You must type DELETE exactly to confirm account deletion.";
             } else {
                 $pdo->beginTransaction();
 
