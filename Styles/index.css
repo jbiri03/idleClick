@@ -557,3 +557,31 @@ button:disabled {
 .leaderboard-table tr:hover {
     background-color: #ffe8c7;
 }
+
+/* GENERATE REPORT BUTTON */
+#playerReport {
+    background-color: #ffe8a3;       
+    color: #5a4633;                   
+    padding: 12px 22px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    width: 100%;
+    margin-top: 15px;
+
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+}
+
+#playerReport:hover {
+    background-color: #ffd77a;        
+    transform: translateY(-2px);      
+    box-shadow: 0 5px 10px rgba(0,0,0,0.18);
+}
+
+#playerReport:active {
+    background-color: #ffcc66;      
+    transform: translateY(0px);      
+    box-shadow: 0 2px 4px rgba(0,0,0,0.10);
+}

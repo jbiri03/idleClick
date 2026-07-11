@@ -154,6 +154,7 @@
                         <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier; ?></li>
                         <li>Current Prestige Level: <?php echo $current_prestige_level; ?></li>
                     </ul>
+                    <button id="playerReport">Generate Player Report</button>
 
                 <!-- HIDDEN ELEMENTS -->
                 <div id="upgradeData" style="display:none;"
