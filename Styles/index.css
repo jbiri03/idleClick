@@ -1,3 +1,105 @@
+
+/* SCALABLE */
+:root {
+    --cream: #fffaf3;
+    --mint: #f7ffe8;
+    --orange: #f2b05e;
+    --orange-light: #e3c27d;
+    --brown: #5a4633;
+    --pink: #ffe0e8;
+    --pink-dark: #ffccd8;
+    --peach: #ffb88c;
+    --shadow-soft: 0 3px 6px rgba(0,0,0,0.15);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE GRID LAYOUT */
+@media (max-width: 1100px) {
+    body {
+        flex-direction: column;
+    }
+
+    .column1, .column2, .column3 {
+        width: 100% !important;
+        padding: 20px;
+    }
+
+    #nav ul li button {
+        font-size: 22px;
+    }
+}
+
+/* UNIVERSAL CARD */
+.card {
+    background-color: var(--mint);
+    border: 3px solid var(--orange-light);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-medium);
+}
+
+/* UNIVERSAL BUTTON */
+.btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
+    box-shadow: var(--shadow-soft);
+    color: var(--brown);
+}
+
+.btn-pink {
+    background-color: var(--pink);
+}
+
+.btn-pink:hover {
+    background-color: var(--pink-dark);
+    transform: translateY(-2px);
+}
+
+.btn-orange {
+    background-color: var(--orange);
+    color: white;
+}
+
+.btn-orange:hover {
+    background-color: #e09a4a;
+    transform: translateY(-2px);
+}
+
+/* UNIVERSAL TABLE COMPONENT (matches your style) */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff7e6;
+    border: 3px solid var(--orange-light);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+}
+
+.table th {
+    background-color: var(--pink);
+    padding: 14px;
+    font-size: 20px;
+    color: var(--brown);
+}
+
+.table td {
+    padding: 14px;
+    font-size: 18px;
+    color: var(--brown);
+    text-align: center;
+    border-bottom: 1px solid #f0d9b5;
+}
+
+.table tr:hover {
+    background-color: #fff2d9;
+}
+
+
 /* GLOBAL */
 html, body {
     margin: 0;

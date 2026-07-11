@@ -37,9 +37,9 @@
                 $current_cps = (int)$player_data['cps'];
                 $current_bonus = (int)$player_data['bonus'];
 
-                $current_prestige_points     = (int)$player_data['prestige_points'];
+                $current_prestige_points = (int)$player_data['prestige_points'];
                 $current_prestige_multiplier = (float)$player_data['prestige_multiplier'];
-                $current_prestige_level      = (int)$player_data['prestige_level'];
+                $current_prestige_level = (int)$player_data['prestige_level'];
 
 
                 
@@ -50,9 +50,9 @@
                 $current_clickPower = 1;
                 $current_cps = 0;
                 $current_bonus = 0;
-                $current_prestige_points     = 0;
+                $current_prestige_points = 0;
                 $current_prestige_multiplier = 1.0;
-                $current_prestige_level      = 0;
+                $current_prestige_level = 0;
 
             }
 
@@ -151,8 +151,8 @@
 
                 <h2>PROGRESS</h2>
                     <ul>
-                        <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier; ?></li>
-                        <li>Current Prestige Level: <?php echo $current_prestige_level; ?></li>
+                        <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier ?? 0; ?></li>
+                        <li>Current Prestige Level: <?php echo $current_prestige_level ?? 0; ?></li>
                     </ul>
                 <button id="playerReport"><a href="player_report.php">Generate Player Report</a></button>
 
