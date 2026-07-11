@@ -24,7 +24,6 @@ try {
     $pdo = new PDO("sqlite:$db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // LOAD PLAYER SAVE
     $stmt = $pdo->prepare("
         SELECT cakes, currency, multiplier, clickPower, cps, bonus,
                prestige_multiplier, prestige_points, prestige_level
@@ -36,15 +35,15 @@ try {
     $player_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($player_data) {
-        $current_cakes              = (int)$player_data['cakes'];
-        $current_currency           = (int)$player_data['currency'];
-        $current_multiplier         = (int)$player_data['multiplier'];
-        $current_clickPower         = (int)$player_data['clickPower'];
-        $current_cps                = (int)$player_data['cps'];
-        $current_bonus              = (int)$player_data['bonus'];
-        $current_prestige_multiplier= (float)$player_data['prestige_multiplier'];
-        $current_prestige_points    = (int)$player_data['prestige_points'];
-        $current_prestige_level     = (int)$player_data['prestige_level'];
+        $current_cakes               = (int)$player_data['cakes'];
+        $current_currency            = (int)$player_data['currency'];
+        $current_multiplier          = (int)$player_data['multiplier'];
+        $current_clickPower          = (int)$player_data['clickPower'];
+        $current_cps                 = (int)$player_data['cps'];
+        $current_bonus               = (int)$player_data['bonus'];
+        $current_prestige_multiplier = (float)$player_data['prestige_multiplier'];
+        $current_prestige_points     = (int)$player_data['prestige_points'];
+        $current_prestige_level      = (int)$player_data['prestige_level'];
     }
 
 } catch (PDOException $e) {
@@ -61,7 +60,6 @@ try {
 </head>
 <body>
 
-<!-- NAVIGATION -->
 <div class="column1">
     <div id="nav">
         <ul>
@@ -75,7 +73,6 @@ try {
     </div>
 </div>
 
-<!-- LEADERBOARD CONTENT -->
 <div class="column2">
     <h1 class="leaderboard-title">🏆 Global Leaderboard</h1>
 
@@ -87,12 +84,9 @@ try {
 
     <table class="leaderboard-table">
         <thead>
-            <tr>
-                <th>Player</th>
-                <th>Cakes</th>
+            <tr id="leaderboardHeaderRow">
+                <th>Username</th>
                 <th>Currency</th>
-                <th>Prestige Level</th>
-                <th>Last Updated</th>
             </tr>
         </thead>
         <tbody id="leaderboardResults">
@@ -101,7 +95,6 @@ try {
     </table>
 </div>
 
-<!-- PLAYER STATS -->
 <div class="column3">
     <div id="stats">
         <h1>STATISTICS</h1>
@@ -128,8 +121,6 @@ try {
     </div>
 </div>
 
-<!-- SCRIPTS -->
 <script src="logic/leaderboard.js"></script>
-
 </body>
 </html>
