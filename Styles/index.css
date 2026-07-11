@@ -217,8 +217,6 @@ body {
 
 #cake button img {
     width: 100%;
-    /* border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); */
     transition: 0.15s ease;
     image-rendering: pixelated;
     animation: cakePulse 1.4s ease-in-out infinite;
@@ -230,7 +228,6 @@ body {
 }
 
 #cake button img:active{
-    box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
 
@@ -696,7 +693,23 @@ button:disabled {
     box-shadow: 0 2px 4px rgba(0,0,0,0.10);
 }
 
+/* DELETE BUTTON */
+#delete-button {
+    background: #d9534f !important;
+    color: #fff  !important;
+    border: none  !important;
+    padding: 12px 20px  !important; 
+    border-radius: 10px  !important;
+    font-size: 18px  !important;
+    cursor: pointer  !important;
+    transition: 0.2s ease !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
 
+#delete-button:hover {
+    background: #c9302c;
+    transform: translateY(-2px) !important;
+}
 
 
 
