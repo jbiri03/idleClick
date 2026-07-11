@@ -7,7 +7,8 @@ const buttons = [
     document.getElementById('homeButton'),
     document.getElementById('settingsButton'),
     document.getElementById('logOut'),
-    document.getElementById('leaderboard')
+    document.getElementById('leaderboard'),
+    document.getElementById('playerReport')
 ];
 
 const loginButton = document.getElementById('loginButton');
