@@ -154,7 +154,8 @@
                         <li>Prestige Multiplier: x<?php echo $current_prestige_multiplier; ?></li>
                         <li>Current Prestige Level: <?php echo $current_prestige_level; ?></li>
                     </ul>
-                    <button id="playerReport">Generate Player Report</button>
+                <button id="playerReport"><a href="player_report.php">Generate Player Report</a></button>
+
 
                 <!-- HIDDEN ELEMENTS -->
                 <div id="upgradeData" style="display:none;"
@@ -179,10 +180,6 @@
         <script type="module" src="logic/clicker.js"></script>
 
 
-        <!-- CAKE DETAILS -->
-         <!-- <script src="logic/Cake.js"> -->
-            <!-- // const sessionId = ""; // Pass the session ID to the JavaScript file -->
-         <!-- </script> -->
 
          <!-- LOG IN REQUIREMENT -->
           <script src="logic/session_check/check_session.js"></script>
