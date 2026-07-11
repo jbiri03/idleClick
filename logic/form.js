@@ -4,19 +4,19 @@ var capital = document.getElementById("capital");
 var number = document.getElementById("number");
 var length = document.getElementById("length");
 
-// When the user clicks on the password field, show the message box
+// SHOW MESSAGE BOX ON PRESS
 myInput.onfocus = function() {
   document.getElementById("message").style.display = "block";
 }
 
-// When the user clicks outside of the password field, hide the message box
+// HIDE MESSAGE BOX ON OUTSIDE PRESS
 myInput.onblur = function() {
   document.getElementById("message").style.display = "none";
 }
 
-// When the user starts to type something inside the password field
+// ON TYPE
 myInput.onkeyup = function() {
-  // Validate lowercase letters
+  // VALIDATE LOWER CASE
   var lowerCaseLetters = /[a-z]/g;
   if(myInput.value.match(lowerCaseLetters)) {
     letter.classList.remove("invalid");
@@ -26,7 +26,7 @@ myInput.onkeyup = function() {
     letter.classList.add("invalid");
 }
 
-  // Validate capital letters
+  // VALIDATE CAPITAL
   var upperCaseLetters = /[A-Z]/g;
   if(myInput.value.match(upperCaseLetters)) {
     capital.classList.remove("invalid");
@@ -36,7 +36,7 @@ myInput.onkeyup = function() {
     capital.classList.add("invalid");
   }
 
-  // Validate numbers
+  // VALIDATE NUMBERS
   var numbers = /[0-9]/g;
   if(myInput.value.match(numbers)) {
     number.classList.remove("invalid");

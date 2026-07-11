@@ -1,3 +1,4 @@
+//LEADERBOARD LOGIC
 document.addEventListener("DOMContentLoaded", () => {
     const resultsBody = document.getElementById("leaderboardResults");
     const headerRow = document.getElementById("leaderboardHeaderRow");

@@ -1,3 +1,4 @@
+//PRESTIGE LOGIC
 document.addEventListener("DOMContentLoaded", () => {
 
     const prestigeButton = document.getElementById("prestigeButton");
@@ -16,13 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
    //1000 CAKES PER POINT
     const earnedPrestige = Math.floor(currentCakes / 1000);
 
-    // Total prestige points after prestige
+    // TOTAL PRESTIGE POINTS
     const newPrestigePoints = currentPrestigePoints + earnedPrestige;
 
-    // New prestige multiplier
+    // NEW PRESTIGE MULTIPLIER
     const newPrestigeMultiplier = 1 + (newPrestigePoints * 0.1);
 
-    // Update UI
+    // UPDATE UI
     prestigePointsEl.textContent = newPrestigePoints;
     newPrestigeMultiplierEl.textContent = "x" + newPrestigeMultiplier.toFixed(1);
 
@@ -34,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         prestigeButton.style.cursor = "not-allowed";
     }
 
-    // Handle prestige button click
+    // PRESTIGE BUTTON
     prestigeButton.addEventListener("click", () => {
 
         // Prevent clicking if disabled

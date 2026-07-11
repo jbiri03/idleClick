@@ -1,3 +1,4 @@
+//CAKE CLASS
 class Cake {
 	constructor (adjective, color, flavor, frosting){
         this.adjective = adjective;

@@ -1,3 +1,4 @@
+//PLAYER CLASS
 class Player{
     constructor(cakes,cash) {
         this.cakes = cakes;

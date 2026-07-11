@@ -131,9 +131,7 @@ if (isClickerPage) {
     }, 100);
 }
 
-/* -------------------------------------------------------
-   SAVE TIMER (ONLY ON CLICKER PAGE)
----------------------------------------------------------*/
+//SAVE TIMER
 if (isClickerPage) {
     setInterval(() => {
         const xhr = new XMLHttpRequest();

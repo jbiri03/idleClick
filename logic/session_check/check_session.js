@@ -1,3 +1,4 @@
+//BUTTONS TO DISABLE
 const buttons = [
     document.getElementById('saveButton'), 
     document.getElementById('sellButton'),
