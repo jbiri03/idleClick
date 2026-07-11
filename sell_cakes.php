@@ -95,6 +95,7 @@ try {
                     <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
                     <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
                     <li><a href="prestige.php"><button id = "prestigeButton">Prestige</button></a></li>
+                    <li><a href="leaderboard.php"><button id = "leaderboard">Leaderboard</button></a></li>
                     <li><a href="settings.php"><button id = "settingsButton">Settings</button></a></li>
                 </ul>
             </div>

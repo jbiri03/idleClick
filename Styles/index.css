@@ -51,6 +51,9 @@ body {
     transform: scale(1.03);
 }
 
+
+
+
 /* CENTER CONTENT */
 .column2 {
     width: 50%;
@@ -291,6 +294,14 @@ body {
     line-height: 1.4;
 }
 
+.prestige-helper {
+    margin-top: -10px;
+    margin-bottom: 18px;
+    font-size: 0.75rem;
+    color: #7a6a58;
+    text-align: center;
+}
+
 /* UPGRADE SEARCH */
 #upgradeSearchContainer {
     text-align: center;
@@ -484,3 +495,65 @@ button:disabled {
     transform: none !important;
 }
 
+/* LEADERBOARD PAGE */
+/* Leaderboard Title */
+.leaderboard-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #6b3e26;
+}
+
+/* Report Buttons */
+.report-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.report-buttons button {
+    background-color: #f7c873;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.report-buttons button:hover {
+    background-color: #ffdd99;
+    transform: translateY(-2px);
+}
+
+/* Leaderboard Table */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.leaderboard-table th {
+    background-color: #f2b05e;
+    padding: 12px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.leaderboard-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.leaderboard-table tr:hover {
+    background-color: #ffe8c7;
+}

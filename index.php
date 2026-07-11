@@ -79,15 +79,11 @@
                     <li><a href="sell_cakes.php"><button id = "sellButton">Sell</button></a></li>
                     <li><a href="upgrades.php"><button id = "upgradesButton">Upgrades</button></a></li>
                     <li><a href="prestige.php"><button id = "prestigeButton">Prestige</button></a></li>
+                    <li><a href="leaderboard.php"><button id = "leaderboard">Leaderboard</button></a></li>
                     <li><a href="settings.php"><button id = "settingsButton">Settings</button></a></li>
-                    <!-- <li><a href="pets.html"><button id = "petsButton">Pets</button></a></li>
-                    <li><a href="inventory.html"><button id ="inventoryButton">Inventory</button></a> </li> -->
                 </ul>
             </div>
         </div>
-
-        <!-- ADDITIONAL FEATURES TO BE ADDED-->
-        <!-- <a href="shop.html"><button>Shop</button></a> -->
 
         <div class="column2">
             <!-- SIGN IN -->

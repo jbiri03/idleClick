@@ -6,7 +6,8 @@ const buttons = [
     document.getElementById('clicker'),
     document.getElementById('homeButton'),
     document.getElementById('settingsButton'),
-    document.getElementById('logOut')
+    document.getElementById('logOut'),
+    document.getElementById('leaderboard')
 ];
 
 const loginButton = document.getElementById('loginButton');

@@ -105,6 +105,7 @@ $current_prestige_level = 0;
                     <li><a href="sell_cakes.php"><button>Sell</button></a></li>
                     <li><a href="upgrades.php"><button>Upgrades</button></a></li>
                     <li><a href="prestige.php"><button>Prestige</button></a></li>
+                    <li><a href="leaderboard.php"><button id = "leaderboard">Leaderboard</button></a></li>
                     <li><a href="settings.php"><button id = "settingsButton">Settings</button></a></li>
                     <!-- <li><a href="pets.html"><button>Pets</button></a></li>
                     <li><a href="inventory.html"><button>Inventory</button></a> </li> -->

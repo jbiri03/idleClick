@@ -108,6 +108,7 @@ $Baker3Purchased = $purchased_upgrades["Basic Auto Baker III"] ?? 0;
             <li><a href="sell_cakes.php"><button>Sell</button></a></li>
             <li><a href="upgrades.php"><button>Upgrades</button></a></li>
             <li><a href="prestige.php"><button>Prestige</button></a></li>
+            <li><a href="leaderboard.php"><button id = "leaderboard">Leaderboard</button></a></li>
             <li><a href="settings.php"><button id="settingsButton">Settings</button></a></li>
         </ul>
     </div>
