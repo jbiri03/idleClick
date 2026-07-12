@@ -1,6 +1,5 @@
 import { game, upgrades, buyUpgrade } from "./game.js";
 
-window.game = game; //temporary test line
 
 //LOAD UPGRADE DATA
 const upgradeData = document.getElementById("upgradeData");
