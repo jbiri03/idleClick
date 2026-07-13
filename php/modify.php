@@ -57,6 +57,7 @@ if(isset($_SESSION['user_id'])) {
                         $stmt->bindValue(':user_id', $_SESSION['user_id'], \PDO::PARAM_INT);
                         $stmt->execute();
 
+                        $_SESSION['username'] = $newUsername;
                         $usernameSuccessMsg = 'Username successfully updated.';
                     }
                 }
