@@ -124,7 +124,7 @@ $confirmErr = "";
                 //RELOCATE AFTER SUCCESS!
                 if(isset($_POST['button'])){
                     $_SESSION['success_message'] = 'Account created successfully. Please log in.';
-                    header("Location: /capstone/php/login.php");
+                    header("Location: /php/login.php");
                     exit();
                 }
             }
