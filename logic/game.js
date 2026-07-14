@@ -1,4 +1,4 @@
-import { SugarMultiplier, ClickBooster, AutoBaker } from "./Upgrades.js";
+import { SugarMultiplier, ClickBooster, AutoBaker } from "./upgrades.js";
 
 
 //PAGE CHECK

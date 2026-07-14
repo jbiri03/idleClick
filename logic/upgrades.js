@@ -1,3 +1,4 @@
+ //MAIN UPGRADES CLASS
  class Upgrades {
     constructor(name, cost) {
         this.name = name;
@@ -8,6 +9,7 @@
     }
 }
 
+//INHERITED UPGRADE CLASSES
 class SugarMultiplier extends Upgrades{
     constructor(name, cost, multiplier){
         super(name, cost);
