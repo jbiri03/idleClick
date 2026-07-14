@@ -1,5 +1,5 @@
 <?php
 
-$db = __DIR__ . '/../database/test.db';
+$db = __DIR__ . '/../database/idleGame.db';
 
 ?>
